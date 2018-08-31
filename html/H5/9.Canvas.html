@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.all {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-around;
+			}
+			
+			.all canvas {
+				width: 30%;
+				border: 1px solid #d7d7d7;
+				margin-top: 30px;
+			}
+			
+			img {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--
+				
+			var canv = obj.getContext("2d") 	为画布添加绘图属性
+			
+			********************	填充颜色		************************************************************
+			* 
+			fillStyle(颜色、渐变或模式) = 			color 		指示绘图填充色的 CSS 颜色值。默认值是 #000000。
+												gradient 	用于填充绘图的渐变对象（线性 或 放射性）。
+												pattern 	用于填充绘图的 pattern 对象。	
+						
+			fill() 执行填充操作
+			
+			
+			********************	设置描边		************************************************************
+			*
+			strokeStyle(颜色、渐变或模式) = 			color 		指示描边的 CSS 颜色值。默认值是 #000000。
+												gradient 	用于描边的渐变对象（线性 或 放射性）。
+												pattern 	用描边的 pattern 对象。	
+						
+			lineCap(结束端点样式)			= 	butt(平直的边缘)  / round(圆形线帽)  / square (正方形线帽)	
+			lineJoin(拐角类型) 			=	bevel(创建斜角)  / round(创建圆角)  / mite(默认。创建尖角)
+			lineWidth(线条宽度)			=	10 			
+			miterLimit(最大斜接长度) 		= 	2  (斜接长度指的是在两条线交汇处内角和外角之间的距离)
+													
+			stroke()  绘制已定义的路径。 
+
+			
+			********************	设置阴影		*************************************************************
+			
+			shadowColor= "black"  		设置或返回用于阴影的颜色。
+			shadowBlur = 20; 			设置或返回用于阴影的模糊级别。
+			shadowOffsetX = 20; 		设置或返回阴影与形状的水平距离。
+			shadowOffsetY = 20; 		设置或返回阴影与形状的垂直距离。
+			
+			
+			********************	渐变与重复元素		*********************************************************
+			
+			createLinearGradient(x1,y1,x2,y2) 				创建线性渐变。通过fill()或stroke()方法应用
+			
+			createRadialGradient(x0,y0,r0,x1,y1,r1) 		x0 	渐变的开始圆的 x 坐标
+			创建放射状/环形的渐变									y0 	渐变的开始圆的 y 坐标
+															r0 	开始圆的半径
+															x1 	渐变的结束圆的 x 坐标
+															y1 	渐变的结束圆的 y 坐标
+															r1 	结束圆的半径		
+			
+		
+			设置渐变颜色与位置		addColorStop(0.2,"red")		0.2 表示在渐变中的位置，red表示渐变的颜色
+			
+			在指定的方向内重复指定的元素	createPattern(image,"repeat|repeat-x|repeat-y|no-repeat")	
+			
+			
+			
+			********************	设置矩形与文字		*********************************************************
+			* 
+			* 设置矩形
+			
+			rect(x,y,width.height);							矩形
+			fillRect(x,y,width.height) 						填充的矩形。
+			strokeRect(x,y,width.height) 					描边矩形。
+			clearRect(x,y,width.height) 					清除矩形。
+			
+			
+			* 设置字体
+			font = "italic 	small-caps 	bold 	12px 	arial";
+					字体样式	字体变体		粗细		大小		字体系列
+			
+			textAlign(水平对齐) = start(文本在指定的位置开始 ) / end(文本在指定的位置结束) / center(文本的中心被放置在指定的位置) / left(文本在指定的位置开始) / right(文本在指定的位置结束)
+			
+			textBaseline(垂直对齐) = alphabetic(文本基线是普通的字母基线) /  top(基线顶端) / hanging(悬挂在基线) / middle(基线正中) / ideographic(表意基线) / bottom(基线底端)
+			
+			填充文本		fillText(text,x,y,maxWidth);		
+			描边文本		strokeText(text,x,y,maxWidth)；
+			
+			//	text 	规定在画布上输出的文本。
+			//	x 	开始绘制文本的 x 坐标位置（相对于画布）。
+			//	y 	开始绘制文本的 y 坐标位置（相对于画布）。
+			//	maxWidth 	可选。允许的最大文本宽度，以像素计。
+			
+			
+			measureText(text).width;		返回包含指定文本宽度的对象。
+			
+			
+			
+			********************	路径		*********************************************************
+			* 
+			beginPath() 								起始一条路径，或重置当前路径。
+			closePath() 								创建从当前点回到起始点的路径。
+			
+			moveTo(x,y) 								把路径移动到画布中的指定点
+			lineTo(x,y) 								线条。			
+			quadraticCurveTo(cpx,cpy,x,y); 				创建二次贝塞尔曲线。
+			bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y);		创建三次贝塞尔曲线。
+			
+			
+			arc(x,y,r,sAngle,eAngle,counterclockwise);	创建弧/曲线（用于创建圆形或部分圆）。
+				//	x 	圆的中心的 x 坐标。
+				/	y 	圆的中心的 y 坐标。
+				//	r 	圆的半径。
+				//	sAngle 	起始角，以弧度计（弧的圆形的三点钟位置是 0 度）。
+				//	eAngle 	结束角，以弧度计。
+				//	counterclockwise  可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+						
+						
+			arcTo(x1,y1,x2,y2,r);						创建两切线之间的弧/曲线。
+				//	x1 	弧的起点的 x 坐标。
+				//	y1 	弧的起点的 y 坐标。
+				//	x2 	弧的终点的 x 坐标。
+				//	y2 	弧的终点的 y 坐标。
+				//	r 	弧的半径。
+				
+			
+			isPointInPath() 		如果指定的点位于当前路径中，则返回 true，否则返回 false。
+			
+			clip() 					只有裁剪区域内的像素才可以被现实。类似于PS中的蒙版
+			
+			
+			********************	转换		*********************************************************
+			* 
+			scale(scalewidth，scaleheight) 		缩放当前绘图至更大或更小，第一个值设置宽度的缩放，第二个值设置高度的缩放
+			rotate(angle) 						旋转当前绘图。如需将角度转换为弧度，请使用 degrees*Math.PI/180 公式进行计算。如需旋转 5 度，rotate（5*Math.PI/180）。
+			translate(x,y) 						重新映射画布上的 (0,0) 位置。
+			
+			transform(a,b,c,d,e,f); 			替换绘图的当前转换矩阵，transform()方法的行为相对于由 rotate()、scale()、translate() 或 transform() 完成的其他变换。
+				//	a 	水平缩放绘图。				如果您已经将绘图设置为放到两倍，则 transform() 方法会把绘图放大两倍，您的绘图最终将放大四倍。
+				//	b 	水平倾斜绘图。
+				//	c 	垂直倾斜绘图。
+				//	d 	垂直缩放绘图。
+				//	e 	水平移动绘图。
+				//	f 	垂直移动绘图。
+			
+			setTransform(a,b,c,d,e,f) 			将当前转换重置为单位矩阵。然后运行 transform()。
+			
+			
+			********************	图片		*********************************************************
+			* 
+			drawImage(img,sx,sy,swidth,sheight,x,y,width,height);			
+				//	img 	规定要使用的图像、画布或视频。 	 
+				//	sx 	可选。开始剪切的 x 坐标位置。
+				//	sy 	可选。开始剪切的 y 坐标位置。
+				//	swidth 	可选。被剪切图像的宽度。
+				//	sheight 	可选。被剪切图像的高度。
+				//	x 	在画布上放置图像的 x 坐标位置。
+				//	y 	在画布上放置图像的 y 坐标位置。
+				//	width 	可选。要使用的图像的宽度（伸展或缩小图像）。
+				//	height 	可选。要使用的图像的高度（伸展或缩小图像）。
+				
+			
+			********************	像素操作		*********************************************************
+			* 
+			
+			width 				返回 ImageData 对象的宽度。
+			height 				返回 ImageData 对象的高度。
+			data 				返回一个对象，其包含指定的 ImageData 对象的图像数据。
+			
+			
+			createImageData() 			创建新的、空白的 ImageData 对象。
+				//	createImageData(width,height);
+				//	createImageData(imageData);
+				
+				
+			getImageData(x,y,width,height); 		返回 ImageData 对象，该对象为画布上指定的矩形复制像素数据。
+			
+			
+			putImageData(imgData,x,y,dirtyX,dirtyY,dirtyWidth,dirtyHeight); 	把图像数据（从指定的 ImageData 对象）放回画布上。
+			
+				//	imgData 	规定要放回画布的 ImageData 对象。
+				//	x 	ImageData 对象左上角的 x 坐标，以像素计。
+				//	y 	ImageData 对象左上角的 y 坐标，以像素计。
+				//	dirtyX 	可选。水平值（x），以像素计，在画布上放置图像的位置。
+				//	dirtyY 	可选。垂直值（y），以像素计，在画布上放置图像的位置。
+				//	dirtyWidth 	可选。在画布上绘制图像所使用的宽度。
+				//	dirtyHeight 	可选。在画布上绘制图像所使用的高度。
+				
+			
+			
+			********************	合成		*********************************************************	
+			* 
+			globalAlpha=0.2;	设置透明度
+			
+			globalCompositeOperation="source-in";   属性设置或返回如何将一个源（新的）图像绘制到目标（已有的）的图像上。
+				//	source-over 	默认。在目标图像上显示源图像。
+				//	source-atop 	在目标图像顶部显示源图像。源图像位于目标图像之外的部分是不可见的。
+				//	source-in 	在目标图像中显示源图像。只有目标图像之内的源图像部分会显示，目标图像是透明的。
+				//	source-out 	在目标图像之外显示源图像。只有目标图像之外的源图像部分会显示，目标图像是透明的。
+				//	destination-over 	在源图像上显示目标图像。
+				//	destination-atop 	在源图像顶部显示目标图像。目标图像位于源图像之外的部分是不可见的。
+				//	destination-in 	在源图像中显示目标图像。只有源图像之内的目标图像部分会被显示，源图像是透明的。
+				//	destination-out 	在源图像之外显示目标图像。只有源图像之外的目标图像部分会被显示，源图像是透明的。
+				//	lighter 	显示源图像 + 目标图像。
+				//	copy 	显示源图像。忽略目标图像。
+				//	xor 	使用异或操作对源图像与目标图像进行组合。 
+				
+			
+			********************	其他		*********************************************************	
+			* 
+			save() 		保存当前环境的状态。
+			restore() 	返回之前保存过的路径状态和属性。
+			-->
+		<div class="all">
+
+			<img id="lamp" src="lamp.jpg" />
+			<canvas id="one" height="300">
+			
+			</canvas>
+			<canvas id="two" height="300">			
+			</canvas>
+			<canvas id="three" height="300">			
+			</canvas>
+			<canvas id="four" height="300">			
+			</canvas>
+			<canvas id="five" height="300">			
+			</canvas>
+			<canvas id="six" height="300">			
+			</canvas>
+			<canvas id="seven" height="300">			
+			</canvas>
+			<canvas id="eight" height="300">	
+				
+			</canvas>
+
+			<canvas id="nine" height="300">			
+			</canvas>
+			<canvas id="ten" height="300">			
+			</canvas>
+			<canvas id="eleven" height="300">			
+			</canvas>
+			<canvas id="twe" height="300">			
+			</canvas>
+			<video id="video1" controls width="270">
+				<source src="mov_bbb.mp4" type='video/mp4'>
+				<source src="mov_bbb.ogg" type='video/ogg'>
+				<source src="mov_bbb.webm" type='video/webm'>
+			</video>
+		</div>
+		<script type="text/javascript">
+			function $(id) { //获取ID的封装函数
+				return document.getElementById(id);
+			}
+
+			//-------------- 	背景填充		-------------------
+
+			//创建线性渐变，从上到下的渐变
+			var ctx1 = $("one").getContext("2d");
+			var my_gradient = ctx1.createLinearGradient(0, 0, 0, 200); //（x1,y1,x2,y2）
+			my_gradient.addColorStop(0, "black"); //(透明度,"颜色")
+			my_gradient.addColorStop(1, "white"); //(透明度,"颜色")
+			ctx1.fillStyle = my_gradient; //设置填充为渐变填充
+			ctx1.fillRect(0, 0, 100, 100);
+
+			//创建图片填充
+			var c = $("two");
+			var img = $("lamp"); //获取图片对象
+			var ctx2 = c.getContext("2d");
+			var pat = ctx2.createPattern(img, "repeat"); //创建图片填充对象
+			ctx2.rect(0, 0, 150, 100);
+			ctx2.fillStyle = pat; //应用图片填充对象
+			ctx2.fill();
+
+			//斜接长度
+			var c = document.getElementById("three");
+			var ctx = c.getContext("2d");
+			ctx.lineWidth = 10;
+			ctx.lineJoin = "round";
+			ctx.miterLimit = 5;
+			ctx.moveTo(20, 20);
+			ctx.lineTo(50, 27);
+			ctx.lineTo(20, 34);
+			ctx.stroke();
+
+			//渐变
+			var c = $("four");
+			var ctx = c.getContext("2d");
+			var grd = ctx.createLinearGradient(0, 0, 170, 0);
+			grd.addColorStop(0, "black");
+			grd.addColorStop("0.3", "magenta");
+			grd.addColorStop("0.5", "blue");
+			grd.addColorStop("0.6", "green");
+			grd.addColorStop("0.8", "yellow");
+			grd.addColorStop(1, "red");
+
+			ctx.fillStyle = grd;
+			ctx.fillRect(20, 20, 150, 100);
+
+			//设置阴影
+			var c = $("five");
+			var ctx = c.getContext("2d");
+			ctx.shadowBlur = 20;
+			ctx.shadowOffsetY = 20;
+			ctx.shadowColor = "black";
+			ctx.fillStyle = "red";
+			ctx.fillRect(20, 20, 100, 80);
+
+			//绘制文本
+			var c = $("six");
+			var ctx = c.getContext("2d");
+			ctx.font = "20px Georgia";
+			ctx.fillText("Hello World!", 10, 50);
+			ctx.font = "30px Verdana";
+			// Create gradient
+			var gradient = ctx.createLinearGradient(0, 0, c.width, 0);
+			gradient.addColorStop("0", "magenta");
+			gradient.addColorStop("0.5", "blue");
+			gradient.addColorStop("1.0", "red");
+			// Fill with gradient
+			ctx.fillStyle = gradient;
+			ctx.fillText("Big smile!", 10, 90);
+
+			//转换矩阵
+			var c = $("seven");
+			var ctx = c.getContext("2d");
+
+			ctx.fillStyle = "yellow";
+			ctx.fillRect(0, 0, 250, 100)
+
+			ctx.transform(1, 0.5, -0.5, 1, 30, 10);
+			ctx.fillStyle = "red";
+			ctx.fillRect(0, 0, 250, 100);
+
+			ctx.transform(1, 0.5, -0.5, 1, 30, 10);
+			ctx.fillStyle = "blue";
+			ctx.fillRect(0, 0, 250, 100);
+
+			//绘制图片
+			var c = $("eight");
+			var ctx = c.getContext("2d");
+			var img = $("lamp");
+			ctx.drawImage(img, 10, 10, 150, 180);
+
+			//绘制视频
+			var v = $("video1");
+			var c = $("nine");
+			ctx2 = c.getContext('2d');
+			v.addEventListener('play', function() {
+				var i = window.setInterval(function() {
+					ctx2.drawImage(v, 5, 5, 260, 125)
+				}, 20);
+			}, false);
+			v.addEventListener('pause', function() {
+				window.clearInterval(i);
+			}, false);
+			v.addEventListener('ended', function() {
+				clearInterval(i);
+			}, false);
+
+			//创建空白图像
+			var c = document.getElementById("ten");
+			var ctx = c.getContext("2d");
+			var imgData = ctx.createImageData(100, 100);
+			for(var i = 0; i < imgData.data.length; i += 4) {
+				imgData.data[i + 0] = 255;
+				imgData.data[i + 1] = 0;
+				imgData.data[i + 2] = 0;
+				imgData.data[i + 3] = 255;
+			}
+			ctx.putImageData(imgData, 10, 10);
+
+			//复制图像
+			var c = $("eleven");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "red";
+			ctx.fillRect(10, 10, 50, 50);
+			var imgData = ctx.getImageData(10, 10, 50, 50);
+			ctx.putImageData(imgData, 10, 70);
+			
+			
+		</script>
+	</body>
+
+</html>

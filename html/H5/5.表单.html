@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.one {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-around;
+			}
+			
+			.one> div {
+				box-sizing: border-box;
+				width: 45%;
+				padding: 10px 30px;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			
+			.one> div span {
+				display: inline-block;
+				width: 200px;
+				color: red;
+				text-align: right;
+				margin-right: 30px;
+			}
+			
+			.two {
+				text-align: center;
+				margin: 25px;
+			}
+			
+			[type],
+			[list] {
+				display: inline-block;
+				height: 25px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<!------------------------------------------------------------------
+			
+			placeholder		属性规定可描述输入 <input> 字段预期值的简短的提示信息 。 
+			readonly		属性规定输入字段是只读的。 
+			required		属性规定必需在提交表单之前填写输入字段。 
+			multiple		属性规定允许用户输入到 <input> 元素的多个值。 
+			min  			属性规定 <input>元素的最小值。
+			max  			属性规定 <input>元素的最大值。
+			maxlength  		属性规定 <input> 元素中允许的最大字符数。 
+			list   			属性引用 <datalist> 元素，其中包含 <input> 元素的预定义选项。
+			autocomplete   	属性规定 <input> 元素输入字段是否应该启用自动完成功能。 
+			autofocus     	属性规定当页面加载时 <input> 元素应该自动获得焦点。 
+			checked   		属性规定在页面加载时应该被预先选定的 <input> 元素。
+			disabled    	属性规定应该禁用的 <input> 元素。 
+			form     		属性规定 <input> 元素所属的一个或多个表单。
+			size 			属性规定以字符数计的 <input> 元素的可见宽度。  
+			form			属性规定 <input> 元素所属的一个或多个表单。 
+				
+		----------------------------------------------------------------->
+		<div class="one">
+			<div>
+				<span>按钮</span>
+				<input type="button" value="button" />
+			</div>
+
+			<div>
+				<span>重置按钮</span>
+				<input type="reset" value="reset" />
+			</div>
+			<div>
+				<span>提交按钮</span>
+				<input type="submit" value="submit" />
+			</div>
+			<div>
+				<span>图片提交按钮</span>
+				<input type="image" height="30" width="60" src="../../js/shell/angular/docs/img/angular_parts.png" />
+			</div>
+
+			<div>
+				<span>颜色</span>
+				<input type="color" />
+			</div>
+			<div>
+				<span>本地（年-月-日 时：分）</span>
+				<input type="datetime-local" />
+			</div>
+			<div>
+				<span>日期(年-月-日)</span>
+				<input type="date" />
+			</div>
+			<div>
+				<span>月（年-月）</span>
+				<input type="month" />
+			</div>
+			<div>
+				<span>星期(年 第几周)</span>
+				<input type="week" />
+			</div>
+			<div>
+				<span>时间（时 : 分）</span>
+				<input type="time" />
+			</div>
+			<div>
+				<span>日期(输入)</span>
+				<input type="datetime" />
+			</div>
+
+			<div>
+				<span>多选框</span>
+				<input id="one" type="checkbox" />
+				<label for="one">多选框</label>
+			</div>
+			<div>
+				<span>单选框</span>
+				<input id="two" type="radio" />
+				<label for="two">单选框</label>
+			</div>
+			<div>
+				<span>文件</span>
+				<input type="file" />
+			</div>
+			<div>
+				<span>隐藏域</span>
+				<input type="hidden" />
+			</div>
+			<div>
+				<span>密码</span>
+				<input type="password" />
+			</div>
+			<div>
+				<!--
+				max- 规定允许的最大值 
+				min - 规定允许的最小值 
+				step - 规定合法的数字间隔（如果 step="3"，则合法的数是 -3,0,3,6 等） 
+				value - 规定默认值
+				-->
+				<span>数字</span>
+				<input type="number" step="2" />
+			</div>
+			<div>
+				<!--
+				max- 规定允许的最大值 
+				min - 规定允许的最小值 
+				step - 规定合法的数字间隔（如果 step="3"，则合法的数是 -3,0,3,6 等） 
+				value - 规定默认值
+				-->
+				<span>滑动条</span> 1
+				<input type="range" step="1" min="0" max="100" />100
+			</div>
+			<div>
+				<span>输入框</span>
+				<input type="text" />
+			</div>
+			<div>
+				<span>搜索框</span>
+				<input type="search" />
+			</div>
+			<div>
+				<span>邮件</span>
+				<input type="email" />
+			</div>
+			<div>
+				<span>电话</span>
+				<input type="tel" />
+			</div>
+			<div>
+				<span>Url</span>
+				<input type="url" />
+			</div>
+
+			<div>
+				<span>下拉列表</span>
+				<input list="list" />
+				<datalist id="list">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</datalist>
+			</div>
+		</div>
+		<div class="two">
+			<span style="line-height: 30px; font-size: 30px;">oninput(动态改变)</span>
+			<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+				<input type="range" id="a" value="50">100 +
+				<input type="number" id="b" value="50">=
+				<output name="x" for="a b"></output>
+			</form>
+
+		</div>
+
+	</body>
+
+</html>

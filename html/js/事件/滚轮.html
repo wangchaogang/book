@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Mouse Wheel Data</title>
+		<style>
+			.slider {
+				width: 50px;
+				height: 180px;
+				background: #eee;
+				padding: 10px 0;
+				cursor: n-resize;
+			}
+			
+			.slider-slot {
+				width: 16px;
+				margin: 0 auto;
+				height: 180px;
+				background: #eee;
+				border: 1px solid gray;
+				border-color: #999 white white #999;
+				position: relative;
+			}
+			
+			.slider-trigger {
+				width: 14px;
+				height: 18px;
+				font: 1px/0 arial;
+				border: 1px solid gray;
+				border-color: white #999 #999 white;
+				background: #ccc;
+				position: absolute;
+			}
+			
+			.slider-trigger b {
+				display: block;
+				margin: 1px 3px;
+				border-top: 1px solid #999;
+				border-bottom: 1px solid white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h2>文本框增加/减少值</h2>
+		<div><input type="text" id="txt" value="1440" /><span id="warn">文本框获得焦点后滚动鼠标滚轮</span></div>
+		<h2>鼠标滚动缩放图片</h2>
+		<div><img src="http://files.jb51.net/upload/201005/20100531231516458.jpg" id="img" width="300" style="cursor:-moz-zoom-in" title="鼠标滚动 缩放大小" / alt="" /></div>
+		<h2>鼠标滚动控制滑块移动</h2>
+		<div class="slider" id="slider">
+			<div class="slider-slot">
+				<div class="slider-trigger" id="sliderTrigger">
+					<strong></strong>
+					<strong></strong>
+					<strong></strong>
+					<strong></strong>
+					<strong></strong>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+//		var $ = function(i) {
+//				return document.getElementById(i);
+//			}
+//			//取得滚动值 
+//		function getWheelValue(e) {
+//			e = e || event;
+//
+//			return(e.wheelDelta ? e.wheelDelta / 120 : -(e.detail % 3 == 0 ? e.detail / 3 : e.detail));
+//		}
+//
+//		//阻止默认动作
+//		function stopEvent(e) {
+//			e = e || event;
+//			//给谷歌/火狐清楚默认事件
+//			if(e.preventDefault) e.preventDefault();
+//			//给IE清楚默认事件
+//			e.returnValue = false;
+//		}
+//
+//		obj.addEventListener(isFirefox ? 'DOMMouseScroll' : type, fn, false)
+//			//绑定事件,这里对mousewheel做了判断,注册时统一使用mousewheel 
+//		function addEvent(obj, type, fn) {
+//			//判断浏览器是否为火狐浏览器，如果是则返回空，如果不是则返回undefined；
+//			var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+//
+//			//火狐绑定事件的方法是addEventListener，IE绑定事件的方法是attachEvent；
+//			if(obj.addEventListener) { //给除了IE的浏览器绑定事件				
+//				obj.addEventListener(isFirefox ? 'DOMMouseScroll' : type, fn, false);
+//			} else { //给IE的浏览器绑定事件
+//				obj.attachEvent('on' + type, fn);
+//			}
+//			//调用fu函数，如果不调用，fn函数默认是不执行的
+//			return fn;
+//		}
+//		//移除事件,这里对mousewheel做了兼容,移除时统一使用mousewheel 
+//		function delEvent(obj, type, fn) {
+//			var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+//			if(obj.removeEventListener)
+//				obj.removeEventListener(isFirefox ? 'DOMMouseScroll' : type, fn, false);
+//			else
+//				obj.detachEvent('on' + type, fn);
+//		}
+//		/*限制范围函数, 
+//		参数是三个数字,如果num 大于 max, 则返回max， 如果小于min，则返回min,如果在max和min之间，则返回num 
+//		*/
+//		function range(num, max, min) {
+//			return Math.min(max, Math.max(num, min));
+//		}
+//		/* ------------ */
+//		/* <h2>文本框增加/减少值</h2> */
+//		$('txt').onfocus = function() {
+//				//保存txt自己的引用 
+//				var me = this,
+//					//onfocus之后注册滚轮事件 
+//					handler = addEvent(me, 'mousewheel', function(e) {
+//						stopEvent(e);
+//						var delta = getWheelValue(e);
+//						/* 
+//						+me.value 将me.value转换成数字， 
+//						然后使用isNaN检查转换后的数字是否为NaN 
+//						如果是，重新赋值me.value=0; 
+//						*/
+//						if(isNaN(+me.value)) me.value = 0;
+//						//递增（或递减） 
+//						me.value = +me.value + delta;
+//						//选中me里的文字 
+//						me.select();
+//					});
+//				//失去焦点时，把mousewheel事件移除，重置window.onblur和handler引用为null 
+//				this.onblur = function() {
+//						//移除掉mousewheel事件 
+//						delEvent(me, 'mousewheel', handler);
+//						window.onblur = handler = null;
+//					}
+//					//为了防止浏览器失焦后，文本框重复触发focus，在onblur时，让文本框同时失焦 
+//				window.onblur = function() {
+//					me.blur();
+//					//把自己清理掉 
+//					this.onblur = null;
+//				}
+//			}
+//			/* <h2>鼠标滚动缩放图片</h2> */
+//		addEvent($('img'), 'mousewheel', function(e) {
+//			stopEvent(e);
+//			var delta = getWheelValue(e);
+//			//每次递增（或递减）10px，使用了范围限制，保证图片不会过大过小 
+//			var img = $('img'); //没有修复ie的this指向，所以这里只好重新获取img 
+//			img.style.width = range(img.offsetWidth + (delta * 10), 550, 100) + 'px';
+//
+//			return false;
+//		});
+//
+//		/* <h2>鼠标滚动控制滑块移动</h2> */
+//		addEvent($('slider'), 'mousewheel', function(e) {
+//			stopEvent(e);
+//			var delta = getWheelValue(e),
+//				tar = $('sliderTrigger');
+//			//杯具的反转，因为tar.offsetTop 越大，滑块就越往下，所以delta又需要反转回来，向上是负的，向下是正的，所以乘以-1 
+//			tar.style.top = range(tar.offsetTop + (-1 * delta * 10), 160, 0) + 'px';
+//		});
+//
+//		if(obj.addEventListener) {
+//			var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+//			if(isFirefox) {
+//				obj.addEventListener("DOMMouseScroll", tijiao, false);
+//			} else {
+//				obj.addEventListener("mousewheel", tijiao, false);
+//			}
+//		} else {
+//			obj.attachEvent("onmousewheel", tijiao, false);
+//		}
+//
+//		function tijiao(e) {
+//			e.preventDefault();
+//			var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';
+//			if(e.wheelDelta) {
+//				var a = e.wheelDelta / 120;
+//			} else {
+//				if(e.detail % 3 == 0) {
+//					var a = -(e.detail / 3);
+//				} else {
+//					var a = -e.detail;
+//				}
+//
+//			}
+//
+//		}
+	</script>
+	<script type="text/javascript">
+		
+		window.addEventListener(isFirefox ? 'DOMMouseScroll' : "mousewheel" , fn, false);
+		//判断是否为火狐浏览器
+		var isFirefox = typeof document.body.style.MozUserSelect != 'undefined';		
+		//绑定滚轮事件
+		
+		function fn(e) {
+			e = e || event;
+			//调整滚轮返回值兼容
+			var a = e.wheelDelta ? e.wheelDelta / 120 : -(e.detail % 3 == 0 ? e.detail / 3 : e.detail);			
+		}
+	</script>
+
+</html>

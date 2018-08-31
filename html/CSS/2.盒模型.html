@@ -1,0 +1,245 @@
+ <!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<style type="text/css">
+			/*----------------------------------------------------------------------------------			
+			//--------------------------  盒模型    -----------------------------------
+			box-sizing(盒模型设置): 			content-box		height中不包含padding与border的高度
+		  									border-box		height中包含padding与border的高度
+		  	
+		  	//--------------------------  宽高    -----------------------------------	
+		  	height(固定高度): 					50px;
+		  	width(固定宽度): 					50px;
+		  	max-height(最大高度): 				50px;	元素根据内容调整高度，但不会超过最大高度
+		  	min-height(最小高度): 				50px;	元素根据内容调整高度，如果内容小于最小高度，盒子显示为最小高度							
+		  	max-width(最大宽度):  				50px;
+		  	min-width(最小宽度):  				50px;	
+		  	
+		  									
+		 	//--------------------------  元素样式    -----------------------------------
+		  	display(元素样式): 				inline			将元素设置为行内元素，没有宽高，背景颜色与边框需要依靠内容撑开	
+											block			将元素设置为块级元素，该元素会另起一行
+											inline-block	将元素设置为行内块元素，该元素被当成文本处理，但可以设置宽高
+											flex			将元素设置为弹性盒子
+			
+											
+			//--------------------------  弹性盒子   -----------------------------------	
+			父级元素	
+			display:flex;
+			flex-direction(子元素排列方向):		row 			横向从左到右排列（左对齐），默认的排列方式。
+											row-reverse  	反转横向排列（右对齐，从后往前排，最后一项排在最前面。
+											column 			纵向排列。
+											column-reverse 	反转纵向排列，从后往前排，最后一项排在最上面。
+											    
+			flex-wrap(子元素超出宽度换行):		nowrap 默认值。规定灵活的项目不拆行或不拆列。 
+											wrap 规定灵活的项目在必要的时候拆行或拆列。 
+											wrap-reverse 规定灵活的项目在必要的时候拆行或拆列，但是以相反的顺序。 
+
+			justify-content(横向元素的间隔分配):	flex-start 默认值。项目位于容器的开头。 
+											flex-end 项目位于容器的结尾。 
+											center 项目位于容器的中心。 
+											space-between 项目位于各行之间留有空白的容器内。 
+											space-around 项目位于各行之前、之间、之后都留有空白的容器内。
+												 
+			align-items(子元素对齐方式)			stretch 默认值。项目被拉伸以适应容器。 
+											center 项目位于容器的中心。
+											flex-start 项目位于容器的开头。 
+											flex-end 项目位于容器的结尾。 
+											baseline 项目位于容器的基线上。
+																					
+			flex-flow(): 					wrap 规定灵活的项目在必要的时候拆行或拆列。 
+											wrap-reverse 规定灵活的项目在必要的时候拆行或拆列，但是以相反的顺序。 
+				
+			子级元素	
+			flex:							1 设置元素所占比例			
+			order:							3 设置元素排列顺序，必须所有元素都设置顺序才起作用
+									
+			align-self(元素对齐方式)			stretch 默认值。项目被拉伸以适应容器。 
+											center 项目位于容器的中心。
+											flex-start 项目位于容器的开头。 
+											flex-end 项目位于容器的结尾。 
+											baseline 项目位于容器的基线上。
+															
+			
+			//--------------------------  内边距    -----------------------------------
+			padding(内边距):					数值/30px	
+			
+			
+			//--------------------------  外边距    -----------------------------------
+			margin(外边距):					数值/30px	
+			
+			
+			//--------------------------  边框    -----------------------------------			
+			border(边框):						1px solid #fff;
+			border-width(边框宽度):			1px 1px 1px 1px;可设置4个值，代表上下左右四个边
+			border-style(边框样式): 			solid;
+			border-color(边框颜色): 			red transparent(透明) blue black;可设置4个值，代表上下左右四个边
+			border-radius(元素圆角):			20px 20px 20px 20px;可设置4个值，代表4个角的圆角大小
+			注: 边框的四个边的连接点是呈45%的斜边
+			
+			
+			//--------------------------  轮廓    -----------------------------------
+			outline(轮廓,不是元素尺寸的一部分，因此元素的宽度和高度属性不包含轮廓的宽度。)							
+			outline-width(轮廓宽度):			10px 					
+			outline-style(轮廓样式):			none 默认。定义无轮廓。 
+											dotted 定义点状的轮廓。 
+											dashed 定义虚线轮廓。 
+											solid 定义实线轮廓。 
+											double 定义双线轮廓。双线的宽度等同于 outline-width 的值。 
+											groove 定义 3D 凹槽轮廓。此效果取决于 outline-color 值。 
+											ridge 定义 3D 凸槽轮廓。此效果取决于 outline-color 值。 
+											inset 定义 3D 凹边轮廓。此效果取决于 outline-color 值。 
+											outset 定义 3D 凸边轮廓。此效果取决于 outline-color 值。 											
+			outline-color(轮廓颜色):			red  设置轮廓颜色为红色
+			outline-offset(轮廓距离):			5px	
+			
+									
+			//--------------------------  盒子阴影    -----------------------------------
+			box-shadow(盒子阴影):				10px 	0px		10px	10px	red 	inset;
+			可同时设置多个阴影,用","号分隔			横向偏移	纵向偏移	模糊距离	阴影大小	阴影颜色	内阴影
+			
+			
+			//--------------------------  设置元素背景    -----------------------------------			
+			background 						可以设置多个背景图片，通过","分隔
+			background-color(背景颜色 )	:	red;			
+			background-image(背景图像url):		url('smiley.gif');			
+			background-position(图像位置):		left top      左上角
+											left center   左边中间
+											left bottom   左下角
+											right top	     右上角
+											right center  右边中间
+											right bottom  右下角
+											center top    中间顶部
+											center center 居中
+											center bottom 中间底部
+											10% 20%
+											10px 20px
+																									
+			background-size(图像的大小):		cover 此时会保持图像的纵横比并将图像缩放成将完全覆盖背景定位区域的最小大小。 
+											contain 此时会保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小。 
+											100% 100%;
+											100px 100px;
+											
+			background-repeat(重复背景图像): 	repeat 背景图像将向垂直和水平方向重复。这是默认 
+											repeat-x 只有水平位置会重复背景图像 
+											repeat-y 只有垂直位置会重复背景图像 
+											no-repeat background-image不会重复 
+											
+			background-origin(图像的定位区域):	padding-box 背景图像填充框的相对位置 
+											border-box  背景图像边界框的相对位置 
+											content-box 背景图像的相对位置的内容框 
+														
+			background-clip(图像的绘画区域): 	border-box 默认值。背景绘制在边框方框内（剪切成边框方框）。 
+											padding-box 背景绘制在衬距方框内（剪切成衬距方框）。 
+											content-box 背景绘制在内容方框内（剪切成内容方框）。 
+
+			background-attachment(图像滚动): 	scroll 默认 ,背景图片随页面的其余部分滚动。
+											fixed  背景图像是固定的 
+											
+											
+			//--------------------------  元素溢出    -----------------------------------								
+			overflow(元素溢出):				hidden		裁剪内容 - 不提供滚动机制。
+											visible		不裁剪内容，可能会显示在内容框之外。
+											scroll		裁剪内容 - 提供滚动机制。
+											auto		如果溢出框，则应该提供滚动机制。
+											no-display	如果内容不适合内容框，则删除整个框。
+											no-content	如果内容不适合内容框，则隐藏整个内容。
+											
+											
+			//--------------------------  文本溢出    -----------------------------------								
+			text-overflow(文本溢出):			clip 		修剪文本。
+											ellipsis 	显示省略符号来代表被修剪的文本。
+											"<<<" 		使用给定的字符串来代表被修剪的文本。			
+			
+			
+			//--------------------------  元素可见性    -----------------------------------					
+			visibility(元素可见性):			hidden		元素是不可见的
+											visible		 默认值。元素是可见的。
+											collapse 	当在表格元素中使用时，此值可删除一行或一列。
+			
+							
+			//--------------------------  透明度    -----------------------------------							
+			opacity(元素透明度):				0.5 		元素的透明度为50%，取值( 0 — 1 )	
+			
+			
+			//--------------------------  鼠标样式    -----------------------------------
+			cursor(定义鼠标样式):				url			需使用的自定义光标的 URL。
+											default 	默认光标(通常是一个箭头)
+											auto 		默认。浏览器设置的光标。
+											crosshair 	光标呈现为十字线。
+											pointer 	光标呈现为指示链接的指针(一只手)
+											move 		此光标指示某对象可被移动。
+											e-resize 	此光标指示矩形框的边缘可被向右(东)移动。
+											ne-resize 	此光标指示矩形框的边缘可被向上及向右移动(北/东)。
+											nw-resize 	此光标指示矩形框的边缘可被向上及向左移动(北/西)。
+											n-resize 	此光标指示矩形框的边缘可被向上(北)移动。
+											se-resize 	此光标指示矩形框的边缘可被向下及向右移动(南/东)。
+											sw-resize 	此光标指示矩形框的边缘可被向下及向左移动(南/西)。
+											s-resize 	此光标指示矩形框的边缘可被向下移动(北/西)。
+											w-resize 	此光标指示矩形框的边缘可被向左移动(西)。
+											text 		此光标指示文本。
+											wait 		此光标指示程序正忙(通常是一只表或沙漏)。
+											help 		此光标指示可用的帮助(通常是一个问号或一个气球)。
+
+			//--------------------------  过渡   -----------------------------------
+			transition(过渡)
+			transition-property(过度属性): 	all 所有属性都将获得过渡效果。 
+											property 定义应用过渡效果的 CSS属性名称列表，列表以逗号分隔。 
+			
+			transition-duration(过度时长): 	5s;
+			
+			transition-timing-function: 	linear 规定以相同速度开始至结束的过渡效果。 
+			(过渡的变化过程)					ease 规定慢速开始，然后变快，然后慢速结束的过渡。 
+											ease-in 规定以慢速开始的过渡效果）。 
+											ease-out 规定以慢速结束的过渡效果。 
+											ease-in-out 规定以慢速开始和结束的过渡效果
+											cubic-bezier(n,n,n,n)可能的值是 0 至 1 之间的数值。 0最快，1最慢
+
+			transition-delay(过渡延迟):		0s;	
+			
+			
+			//--------------------------  动画   -----------------------------------
+			使用动画
+			animation: 						first 3s ease 0s infinite alternate ;
+			animation-name(动画名称): 			first 
+			animation-duration(动画时长):		5s
+			animation-timing-function: 		linear 规定以相同速度开始至结束的动画效果。 
+			(动画的变化过程)					ease 规定慢速开始，然后变快，然后慢速结束的动画。 
+											ease-in 规定以慢速开始的动画效果）。 
+											ease-out 规定以慢速结束的动画效果。 
+											ease-in-out 规定以慢速开始和结束的动画效果
+											cubic-bezier(n,n,n,n)可能的值是 0 至 1 之间的数值。 0最快，1最慢
+			animation-delay(动画延迟): 		0s
+			
+			animation-direction(是否反向播放):	reverse 动画反向播放。
+											alternate 动画在奇数次正向播放，在偶数次反向播放。 
+											alternate-reverse 动画在奇数次反向播放，在偶数次正向播放。 
+			
+			animation-iteration-count : 	1 / infinite(无限循环)
+			(动画播放次数)
+									
+																
+			定义动画			
+			@keyframes first {
+				0% {....}
+				50% {....}
+				100% {....}
+			}
+			
+			@keyframes first {
+				0%,20%,60%,80% {....}
+				50% {....}
+				100% {....}
+			}
+			----------------------------------------------------------------------------------*/
+		</style>
+	</head>
+
+	<body>
+		
+	</body>
+
+</html>

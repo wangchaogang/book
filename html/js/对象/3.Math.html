@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		<!--
+		
+		Math 对象 ：数学对象，提供对数据的数学计算。如：获取绝对值、向上取整等。无构造函数，无法被初始化，只提供静态属性和方法。
+		Math 对象无构造函数，无法被初始化，只提供静态属性和方法。
+		
+		***************************		静态属性		***************************
+		Math.E ：	常量e。 返回自然对数的底数：2.718281828459045
+		Math.PI ：	常量π。返回圆周率的值 ：3.141592653589793		
+		Math.LN2 		返回 2 的自然对数（约等于0.693）。
+		Math.LN10 		返回 10 的自然对数（约等于2.302）。
+		Math.LOG2E 		返回以 2 为底的 e 的对数（约等于 1.414）。
+		Math.LOG10E 	返回以 10 为底的 e 的对数（约等于0.434）。		
+		Math.SQRT1_2 	返回返回 2 的平方根的倒数（约等于 0.707）。
+		Math.SQRT2 		返回 2 的平方根（约等于 1.414）
+				
+		***************************		静态方法		***************************
+		Math.sin(value) ：正弦函数
+		Math.cos(value) ：余弦函数
+		Math.tan(value) ：正切函数
+		Math.asin(value) ：反正弦函数
+		Math.acos(value) ：反余弦函数
+		Math.atan(value) ：反正切函数
+				
+		/////////////////////////////////////////////////
+		Math.abs(value) ：返回绝对值
+		例：	Math.abs('123'); // => 123 ：纯数字字符串
+			Math.abs('-123'); // => 123
+			Math.abs(123); // => 123
+			Math.abs(-123); // => 123
+			Math.abs('123a'); // => NaN ：非纯数字字符串
+			
+		/////////////////////////////////////////////////
+		Math.ceil(value) ： 对一个数向上取整，并不是四舍五入
+		例：	Math.ceil(2.7); // => 3
+			Math.ceil(2.3); // => 3 ：2.3 向上取整返回 3
+			Math.ceil(-2.7); // => -2
+			Math.ceil(-2.3); // => -2
+			Math.ceil('2.7'); // => 3 ：纯数字字符串
+			Math.ceil('2.7a'); // => NaN ：非纯数字字符串
+		
+		
+		/////////////////////////////////////////////////
+		Math.floor(value) ：对一个数向下取整，并不是四舍五入
+		例：	Math.floor(2.7); // => 2
+			Math.floor(2.3); // => 2
+			Math.floor(-2.7); // => -3 ：-2.7 向下取整返回 -3
+			Math.floor(-2.3); // => -3
+			Math.floor('2.7'); // => 2 ：纯数字字符串
+			Math.floor('2.7a'); // => NaN ：非纯数字字符串
+		
+		/////////////////////////////////////////////////
+		Math.round(value) ： 四舍五入后取整
+		例：	Math.round(2.5); // => 3
+			Math.round(2.4); // => 2
+			Math.round(-2.6); // => -3
+			Math.round(-2.5); // => -2 ：-2.5四舍五入为 -2
+			Math.round(-2.4); // => -2
+			Math.round('2.7'); // => 3 ：纯数字字符串
+			Math.round('2.7a'); // => NaN ：非纯数字字符串
+		
+		/////////////////////////////////////////////////
+		Math.max(value1,value2...valueN) ：返回参数中最大的值
+		例：	Math.max(1, 2, 3, 4, 5); // => 5
+			Math.max(1, 2, 3, 4, '5' ); // => 5
+			Math.max(1, 2, 3, 4, 'a'); // => NaN 
+		
+		/////////////////////////////////////////////////
+		Math.min(value1,value2...valueN) ：返回参数中最小的值
+		例：	Math.min(1, 2, 3, 4, 5); // => 1
+			Math.min('1', 2, 3, 4, 5); // => 1
+			Math.min(1, 2, 3, 4, 'a'); // => NaN 
+		
+		/////////////////////////////////////////////////
+		Math.pow(x,y) ：返回x的y次方
+		例：	Math.pow(2, 3); // => 8 ：2的3次方
+			Math.pow(3, 2); // => 9 ：3的2次方
+			Math.pow('4', 2); // => 16 ：4的2次方
+			Math.pow('2a', 2); // => NaN
+			
+		/////////////////////////////////////////////////
+		Math.sqrt(value) ：返回参数的平方根
+		例：	console.log( Math.sqrt(9) ); // => 3
+			console.log( Math.sqrt(16) ); // => 4
+			console.log( Math.sqrt('25') ); // => 5
+			console.log( Math.sqrt('a') ); // => NaN
+		
+		/////////////////////////////////////////////////
+		Math.random() ：返回一个伪随机数,大于0，小于1.0
+		例：	Math.random(); // => 0.8982374747283757
+			Math.random(); // => 0.39617531932890415
+			Math.random(); // => 0.35413061641156673
+			Math.random(); // => 0.054441051790490746 
+			 
+			 
+			 
+		-->
+	</body>
+</html>

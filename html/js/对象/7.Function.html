@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		<!--
+		
+		*******************************		属性		*******************************
+		* 
+		////////////////////////////////////////////////// 
+		length : 表示函数参数的数量
+		
+		例：
+		function one(a,b,c,d){
+			//调用函数时
+		}
+		var len = one.length  //4
+		
+		//////////////////////////////////////////////////
+		arguments : 所有参数的集合
+		function one(a,b,c,d){
+			arguments[0]   // a
+			arguments[1]   // b
+			arguments[2]   // c
+			arguments[3]   // d
+		}
+		
+		
+		*******************************		方法		*******************************
+		call / apply : 拓展函数的作用域，改变this的值，或者用于传递参数
+		obj.call(zong,[arr1,arr2]);
+		
+		参数说明: 
+		obj ： 需要被拓展作用域的对象
+		zong : 将此对象的作用域应用到被拓展作用域的对象上，将zong的this值，复制一份给obj
+		[arr1,arr2....] : 被拓展的属性名称
+		
+		1：传递参数		
+		function zong(){//总对象
+			this.name = "abc";
+			this.pass = 456;
+		}
+		var obj = new zong();  //实例化总对象，将值保存在OBJ变量中	
+		function fen1(){
+			alert(this.name)
+		}		
+		function fen2(){
+			alert(this.pass)
+			arguments
+		}
+		fen1.apply(obj)	//拓展fen1函数的作用域，将this的值拓展为zong对象下的this值，然后执行fen1
+		fen2.apply(obj)
+		
+		//第二种传递参数的方法
+		function one(num1,num2){
+			return num1+num2;
+		}			
+		function two(n1,n2){
+			return one.apply(this,[n1,n2])
+		}
+		alert(two(15,15))
+		
+		
+		2：拓展作用域		
+		window.name = "abc";
+		function obj() {
+			this.name = 123456;
+			this.pass = 456789;
+		}
+		var obj1 = new obj(); 	//使用前需要通过new实例化对象，并将对象保存在obj1变量中,
+								//还可以通过函数方式的调用，obj()；		
+		function obj1(){
+			alert(this.name);
+		}
+			
+		obj1.apply(obj()) 或者 obj1.apply(obj1)	//将obj1的作用于扩展为obj的作用域
+
+		
+		*******************************		普通函数		*******************************
+		 示例	
+		function ShowName(name) {
+		    alert(name);
+		}
+		
+		///////////////////////////////////////
+		Js中同名函数的覆盖
+		
+		在Js中函数是没有重载，定义相同函数名、不同参数签名的函数，后面的函数会覆盖前面的函数。调用时，只会调用后面的函数。
+		
+		 示例
+		var n1 = 1;	 
+		function add(value1) {
+		    return n1 + 1;
+		}
+		alert(add(n1));//调用的是下面的函数，输出：3
+		 
+		function add(value1, value2) {
+		    return value1 + 2;
+		}
+		alert(add(n1));//输出：3
+
+
+ 		///////////////////////////////////////
+		arguments对象
+
+		说明：arguments 类似于C#的params，操作可变参数：传入函数的参数数量大于定义时的参数数量。
+
+		示例
+		function showNames(name) {
+		    alert(name);//张三
+		    for (var i = 0; i < arguments.length; i++) {
+		        alert(arguments[i]);//张三、李四、王五
+		    }
+		}
+		showNames('张三','李四','王五');
+
+
+ 		///////////////////////////////////////		
+		函数的默认返回值
+
+		若函数没有指明返回值，默认返回的是'undefined'
+		
+		示例
+		function showMsg() {
+		}
+		alert(showMsg());//输出：undefined
+
+　　		
+		*******************************		匿名函数		*******************************
+		
+		///////////////////////////////////////	
+		变量匿名函数	
+		说明：可以把函数赋值给变量、事件。
+		
+		示例
+		//变量匿名函数，左侧可以为变量、事件等
+		var anonymousNormal = function (p1, p2) {
+		    alert(p1+p2);
+		}
+		anonymousNormal(3,6);//输出9
+
+		适用场景：避免函数名污染。若先声明个带名称的函数，再赋值给变量或事件，就造成了函数名的滥用。
+
+ 		///////////////////////////////////////	
+		无名称匿名函数
+		
+		说明：即在函数声明时，在后面紧跟参数。Js语法解析此函数时，里面代码立即执行。
+		
+		示例	
+		(function (p1) {
+		    alert(p1);
+		})(1);
+		
+		适用场景：只需执行一次的。如浏览器加载完，只需要执行一次且后面不执行的功能。
+
+
+ 		*******************************		闭包函数		*******************************
+		
+		说明：假设，函数A内部声明了个函数B，函数B引用了函数B之外的变量，并且函数A的返回值为函数B的引用。那么函数B就是闭包函数。
+
+		示例1：全局引用与局部引用
+		function funA() {
+		    var i = 0;
+		    function funB() { //闭包函数funB
+		        i++;
+		        alert(i)
+		    }
+		    return funB;
+		}
+		var allShowA = funA(); //全局变量引用：累加输出1,2,3,4等
+		
+		function partShowA() {
+		    var showa = funA();//局部变量引用：只输出1
+		    showa();
+		}
+		
+		allShowA是个全局变量，引用了函数funA。重复运行allShowA()，会输出1,2,3,4等累加的值。
+		
+		执行函数partShowA(),因为内部只声明了局部变量showa来引用funA，执行完毕后因作用域的关系，释放showa占用的资源。
+		
+		闭包的关键就在于作用域：全局变量占有的资源只有当页面变换或浏览器关闭后才会释放。var allShowA = funA() 时，相当于allShowA引用了funB()，从而使funB()里的资源不被GC回收，因此funA()里的资源也不会。
+
+ 
+		示例2：有参闭包函数
+		function funA(arg1,arg2) {
+		    var i = 0;
+		    function funB(step) {
+		        i = i + step;
+		        alert(i)
+		    }
+		    return funB;
+		}
+		var allShowA = funA(2, 3); //调用的是funA arg1=2，arg2=3
+		allShowA(1);//调用的是funB step=1,输出 1
+		allShowA(3);//调用的是funB setp=3,输出 4
+
+ 
+		示例3：父函数funA内的变量共享
+		function funA() {
+		    var i = 0;
+		   function funB() {
+		        i++;
+		        alert(i)
+		    }
+		    allShowC = function () {// allShowC引用匿名函数,与funB共享变量i
+		        i++;
+		        alert(i)
+		    }
+		    return funB;
+		}
+		var allShowA = funA();
+		var allShowB = funA();//allShowB引用了funA，allShowC在内部重新进行了绑定，与allShowB共享变量i
+ 
+		适用场景：保证函数funA内里的变量安全，因为外部不能直接访问funA的变量。
+		
+		
+		
+		*******************************		回调函数		*******************************
+				
+		//传递函数作为回调
+		
+		function fn(arg1, arg2, callback){
+		 var num = Math.ceil(Math.random() * (arg1 - arg2) + arg2);
+		 //调用函数，下面的num是实参，将上面num的值作为参数传递给callback函数
+		 callback(num);　　//传递结果  
+		}
+		 
+		fn(10, 20, function(num){//定义函数，这里的的值都是被当作参数传递的，包括匿名函数
+		 console.log("Callback called! Num: " + num); 
+		});　　　　//结果为10和20之间的随机数 
+		
+		
+		
+		-->
+	</body>
+</html>

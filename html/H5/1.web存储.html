@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>	
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+
+				//定义一个数组
+				var arr = [];
+				for(var i = 0; i <= 5; i++) {
+					arr[i] = i + "abc";
+				}
+
+				//定义一个对象
+				var a = {
+					a1: 123,
+					a2: 345,
+					a3: 456
+				}
+				a = JSON.stringify(a); //JSON对象提供的parse和stringify将其他数据类型转化成字符串 
+
+				//localStorage		数据将一直存放在手机缓存中，直到用户清理缓存
+				//sessionStorage 	页面关闭时，销毁存储的数据
+
+				localStorage.a = "dddd"; //存储一个字符串
+				localStorage.b = 55; //存储一个数字
+				localStorage.c = arr; //存储一个数组
+				localStorage.d = a; //存储一个对象	
+				localStorage.f = false; //存储一个布尔值
+				//所有数据都只能被当作字符串存储，不论之前存储的是什么格式，都会被转换为字符串
+
+				var tex1 = localStorage.a;
+				var tex2 = localStorage.b;
+				var tex3 = localStorage.c;
+				var tex4 = JSON.parse(localStorage.d); //将字符串重新转换为对象 				
+				var tex5 = localStorage.f;
+
+				console.log(tex1); //显示字符串
+				console.log(tex2); //显示一个数字字符串
+				console.log(tex3); //显示一个数组字符串
+				console.log(tex4.a2); //显示一个对象,因为在上面一步中，对字符串进行了格式转换
+				console.log(tex5); //显示一个布尔值字符串
+			}
+		</script>
+	</body>
+
+</html>

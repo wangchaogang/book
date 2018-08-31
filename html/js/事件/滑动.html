@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				position: relative;
+			}
+			
+			div {
+				height: 300px;
+				width: 300px;
+				border: 1px solid #000000;
+				position: absolute;
+				background: red;
+				top: 0;
+				left: 0;
+				margin: 0;
+				margin-top: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="one">
+
+		</div>
+		<script type="text/javascript">
+			function $(id) {
+				return document.getElementById(id);
+			}
+			$("one").addEventListener("touchstart", one, false)
+			$("one").addEventListener("touchmove", two, false)
+			$("one").addEventListener("touchend", three, false)
+
+			function one(e) {
+				e.preventDefault();
+				start_x = e.targetTouches[0].clientX;
+				start_y = e.targetTouches[0].clientY;
+			}
+
+			function two(e) {
+				e.preventDefault();
+				var end_x = e.targetTouches[0].clientX;
+				var end_y = e.targetTouches[0].clientY;
+				var len_x = end_x - start_x;
+				var len_y = end_y - start_y;
+				
+				e.target.style.marginLeft = end_x + "px";
+				e.target.style.marginTop = end_y+ "px";
+
+			}
+
+			function three(e) {
+				e.preventDefault();
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		<!-- 添加 图标 -->
+		<link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../svg/font.css" />
+
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+
+	<body>
+		<!----------------------------------------------------------
+			
+			第一步：获取file对象
+			var obj1 = document.getElementById("file");
+			file = obj1.files;
+			file1 = file[0]
+			//files是一个数组，FileReader()只能操作单一的文件对象，所以需要files[i]来使用			
+			
+			第二步:创建文件转换对象
+			var read = new FileReader()
+			
+			第三部:使用文件转换对象的方法转换文件
+			read.readAsText(flie1)
+			
+			第四部:加载处理
+			read.onload = function(){
+				var 返回值 = this.result
+				.....
+			}
+			
+			
+			//文件转换对象的的方法和属性
+			
+				//方法
+				readAsBinaryString(flie)
+				readAsDataURL(flie)
+				readAsText(flie)
+				
+				//事件
+				onloadstart = function(){ this.result }
+				onprogress = function(){ this.result }
+				onabort  = function(){ this.result }
+				onload = function(){ this.result } 
+				onerror = function(){ this.result }
+				onloadend = function(){ this.result }
+				
+				//返回值,用在事件内部
+				this.result
+			
+		----------------------------------------------------------->
+		<input id="file" multiple type="file" />
+		<br />
+		<input id="one" type="button" value="文本" />
+		<br />
+		<input id="two" type="button" value="二进制" />
+		<br />
+		<input id="three" type="button" value="图片" />
+
+		<div id="text"></div>
+		<script type="text/javascript">
+		
+		
+			var one = document.getElementById("one");
+			var two = document.getElementById("two");
+			var three = document.getElementById("three");
+
+			one.addEventListener("click", tijiao_1, true);
+			two.addEventListener("click", tijiao_2, true);
+			three.addEventListener("click", tijiao_3, true);
+
+			function tijiao_1() {
+				//获取文件域上传的文件
+				var obj1 = document.getElementById("file");
+				var obj_2 = document.getElementById("text");
+				//FileReader对象每次只能初一个file对象，文件域获取的上传文件为一个数组，从0开始，所以使用file[0];
+				var file = obj1.files;
+				for (var i = 0, len = file.length; i <= len - 1; i++) {
+					var obj = file[i];
+					//第一步创建文件对象
+					var read = new FileReader();
+					//将文件转换为文本显示
+					read.readAsText(obj);
+					//文件加载成功后执行事件
+					read.onload = function(e) {
+						obj_2.innerHTML += this.result;
+					}
+				}
+
+			}
+
+			function tijiao_2() {
+				var obj1 = document.getElementById("file");
+				var obj_2 = document.getElementById("text");
+				var file = obj1.files;
+
+				for (var i = 0, len = file.length; i <= len - 1; i++) {
+					var obj = file[i];
+					//第一步创建文件对象
+					var read = new FileReader();
+					//将文件转换为文本显示
+					read.readAsText(obj);
+					//文件加载成功后执行事件
+					read.onload = function(e) {
+						obj_2.innerHTML += this.result;
+					}
+				}
+			}
+
+			function tijiao_3() {
+				var obj1 = document.getElementById("file");
+				var obj_2 = document.getElementById("text");				
+				var file = obj1.files;
+				var img = document.getElementsByTagName("img");
+				var arr = [];
+				for (var i= 0, len = img.length; i <= len - 1; i++) {
+					arr.push(img[i].src);
+				}
+				
+				for (var i = 0, len = file.length; i <= len - 1; i++) {
+					var obj = file[i];
+					//第一步创建文件对象
+					var read = new FileReader();
+					//将文件转换为文本显示
+					read.readAsDataURL(obj);
+					//文件加载成功后执行事件
+					read.onload = function(e) {						
+						if(arr.indexOf(this.result) == -1){
+							obj_2.innerHTML += "<img src = '" + this.result + "'/>";
+						}
+						
+					}
+				}
+			}
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		<!--
+			
+		String 对象，对字符串进行操作，如：截取一段子串、查找字符串/字符、转换大小写等等。
+		
+		
+		***************************		定义方式		***************************
+		new String(Value) 构造函数：返回一个内容为Value的String对象
+		
+		
+		***************************		String 属性		***************************
+		length ：返回字符串中的字符数
+		例：	var s = 'abc';
+			console.log(s.length); // => 3
+			console.log('新年快乐'.length); // => 4 ：一个中文字符也计算为1个数量
+			console.log(''.length); // => 0 ：空字符串返回0
+			
+			
+		***************************		实例方法		***************************
+		
+		/////////////////////////////////////////////////
+		 charAt(index) ：返回一个字符串中指定位置的字符，编号从0开始，若传入个不存在的数值，就返回空字符串
+		  例：	var s = 'abc';
+			console.log(s.charAt(1)); // => b ：返回位置为1的字符
+			console.log(s); // => 不影响原来的数组
+			console.log(s.charAt(5)); // => '' ：获取一个不存在位置的字符，返回一个长度为0的空字符串	
+			
+		////////////////////////////////////////////////
+		 charCodeAt(index) ：返回一个字符串中指定位置字符的Unicode编码
+		 例：	var s = 'abc';
+			console.log(s.charCodeAt(0)); // => 98 ：字符b的Unicode编码
+			console.log(s.charCodeAt(5)); // => NaN ：获取一个不存在位置的字符，返回NaN
+			
+		////////////////////////////////////////////////
+		 concat(value1,value2 ... valueN) ：连接一个或多个字符串,并返回连接后的字符串
+		 例：	var s = 'abc';
+			console.log(s.concat('d')); // => abcd
+			console.log(s); // => abc ：不影响原先的字符串
+			console.log(s.concat('d', 'e')); // => abcde
+		 
+		////////////////////////////////////////////////
+		 indexOf(value , |startPosition ) ：在实例中从前往后查找一个字符串或字符，并返回找到的位置(从0开始计数)。若未找到，返回-1
+		  	①value  {string} ：查找的字符串	
+		  	②startPosition {int} 可选 ：开始查找的起始位置，默认从位置0开始查找
+		  	
+		例：	var s = 'abc';
+			console.log(s.indexOf('b')); // => 1
+			console.log(s.indexOf('d')); // => -1 ：未找到
+			console.log(s.indexOf('b', 2)); // => -1 ：从位置2(第3个字符处)开始查找
+		 		 
+		 ////////////////////////////////////////////////
+		 lastIndexOf(value , |startPosition ) ：在实例中从后往前开始查找一个字符串或字符，并返回找到的位置(从0开始计数)。若未找到，返回-1
+		 例：	var s = 'abcabc';
+			console.log(s.lastIndexOf('a')); // => 3 ：从后往前查找
+			console.log(s.lastIndexOf('d')); // => -1 ：未找到返回-1
+			console.log(s.lastIndexOf('a', 2)); // => 0 ：从位置2(第3个字符处)开始往前查找
+		 
+		 ////////////////////////////////////////////////		 		 
+		 localeCompare(value) ：实例与参数进行比较，返回比较结果,0 ：实例比参数大,1 ：实例与参数相等,-1 ：实例比参数小		 	
+		例：	var s='abc';
+			console.log(s.localeCompare('ab')); // => 1 ：实例比参数大
+			console.log(s.localeCompare('abc')); // => 0 ：实例与参数相等
+			console.log(s.localeCompare('abd')); // => -1 ：实例比参数小
+				
+ 		////////////////////////////////////////////////
+		match(regexp) ：使用正则表达式进行匹配查找
+		例：	var s = 'a1b2c3d4';
+			var mc = s.match(/\d+/); // => 获取第一个正则匹配的结果
+			if (mc != null) {
+			    console.log(mc.index); // => 1 ：匹配结果在匹配源的起始位置
+			    console.log(mc.input) // => a1b2c3d4 ：匹配源
+			    console.log(mc[0]); // => 1 ：获取匹配到的结果
+			}
+			 
+			// 2.全局匹配
+			var mcArray = s.match(/\d+/g); // => 获取全部正则匹配的数字
+			if (mcArray != null) {
+			    for (var i = 0,len=mcArray.length; i < len; i++) {
+			        var mc=mcArray[i];
+			        console.log(mc); // => 1,2,3,4 ：获取匹配到的结果
+			    }
+			}
+			 
+			// 2.带括号的匹配
+			s = 'a1b2c3d4';
+			mc = s.match(/[a-z]([1-9])/); // => 获取第一个正则匹配的结果
+			if (mc != null) {
+			    console.log(mc.index); // => 0 ：匹配结果在匹配源的起始位置
+			    console.log(mc.input) // => a1b2c3d4 ：匹配源
+			    console.log(mc[0]); // => a1 ：序号0表示匹配到的结果
+			    console.log(mc[1]); // => 1 ：序号1表示第一个括号内的子匹配结果
+			}
+		
+		////////////////////////////////////////////////
+		replace(regexp, replaceStr) ：替换正则表达式匹配的子串，并返回替换后的字符串
+		例：	var oldStr = 'a1b2c3d4';
+			// 1.正则匹配到【所有】数字，替换成：','逗号
+			var newStr = oldStr.replace(/\d+/g, ',');
+			console.log(newStr); // => a,b,c,d,
+			 
+			// 2.正则匹配到【所有】数字，替换成：匹配结果 + ','逗号
+			newStr = oldStr.replace(/\d+/g, '$&,');
+			console.log(newStr); // => a1,b2,c3,d4,
+			 
+			// 2.正则匹配到【所有】数字，每个匹配结果都调用函数，并返回替换后的结果
+			newStr = oldStr.replace(/\d+/g, function (word) {
+			    if (word % 2 == 0) {
+			        return '偶';
+			    }
+			    return '奇';
+			});
+			console.log(newStr); // => a奇b偶c奇d偶
+			
+		////////////////////////////////////////////////
+		search(regexp) ：返回查找正则表达式第一个匹配的位置
+		例：	console.log( 'abcd'.search(/\d+/) ); // => -1 ：没有找到数字
+			console.log( 'abcd1234'.search(/\d+/) ); // => 4 ：位置序号为4，返回第一个数字的位置
+		
+		
+		////////////////////////////////////////////////
+		split(delimiter, |arrayLength) ：将字符串按照某种分隔符切分成一个由字符串组成的数组并返回
+		例：	console.log( 'a,b,c,d,e'.split(',') ); // => ["a", "b", "c", "d", "e"]
+			console.log( ',a,b,c,d,e,'.split(',') ); // => ["", "a", "b", "c", "d", "e", ""] ：分隔符在最前或最后面，会添加一个空字符串
+			console.log( 'a,b,c,d,e'.split(',',3) ); // => ["a", "b", "c"] ：返回前3个分割的子串
+			console.log( 'a1b2c3d4e'.split(/\d/) ); // => ["a", "b", "c", "d", "e"] ：将数字来做为分隔符
+		
+		////////////////////////////////////////////////
+		substr(start, |wordLength)：返回从字符串start位置开始计算到wordLength个长度的子串
+		例：	ar s = 'abcdefg';
+			onsole.log( s.substr(0) ); // =>  abcdefg ：省略第二个参数，返回从位置序号0开始，一直到最后的字符
+			onsole.log( s.substr(0, 3) ); // => abc ：返回从位置序号0开始，计数3个字符
+			onsole.log( s.substr(2, 4) ); // => cdef ：返回从位置序号2开始，计数4个字符
+			onsole.log( s.substr(-2, 3) ); // fg ：返回从倒数第二个字符串开始，计数3个(超过字符长度，就只返回可统计的字符)
+					
+		////////////////////////////////////////////////
+		substring(start, |end) ：返回从字符串start位置到end前一个位置的子串
+		例：	var s = 'abcdefg';
+			console.log( s.substring(0) ); // =>  abcdefg ：省略end参数，返回从位置序号0开始，一直到最后的字符
+			console.log( s.substring(0, 3) ); // => abc ：返回从位置序号0开始到位置序号2(②参的前一个)的字符
+			console.log( s.substring(2, 4) ); // => cd ：返回从位置序号2开始到位置序号3(②参的前一个)的字符
+			console.log( s.substring(-3, 3) ); // abc ：参数若为负，就按数字0来处理，所以此参数实际返回位置序号0到位置序号3的字符	
+			
+		////////////////////////////////////////////////		
+		slice(start, |end)：返回从字符串start位置到end前一个位置的子串
+		例：	var s = 'abcdefg';
+			console.log( s.slice(1) ); // bcdefg ：省略end参数，结束位置为末尾
+			console.log( s.slice(1, 3) ); // bc ：返回从位置序号1到位置序号2(end前一个位置)的子串
+			console.log( s.slice(-3) ); // efg ：返回从倒数第三个开始到末尾的所有字符
+			console.log( s.slice(-3, -1) ); // ef ：返回从倒数第三个开始到第二个(end前一个位置)的所有字符
+					
+			
+		////////////////////////////////////////////////	
+		toUpperCase() ：将字符串转换为大写并返回
+		toLowerCase() ：将字符串转换为小写并返回
+		trim() ：移除字符串开头和结尾处的空白字符并返回
+		
+		
+		
+		查找		chatAT,chatCodeAt,indexOf,lastIndexOf,match,search
+		比较		localeCompare
+		替换		replace
+		截取		substr，substring,slice
+		分割		split
+		连接		concat
+		--> 
+		
+		
+		
+	</body>
+</html>

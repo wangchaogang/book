@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		
+<!--
+	
+	
+	******************************	创建	******************************
+	
+	方法一：var patt=new RegExp(pattern,modifiers);
+	方法二：var patt=/pattern/modifiers; 
+	
+	说明：	pattern 	: 	模式描述了一个表达式模型。
+			modifiers 	: 	修饰符,描述了检索是否是全局，区分大小写等。
+	
+	组成	= /  (方括号/元字符) {量词}   / 修饰符
+		
+	******************************	修饰符	******************************		
+	i 	执行对大小写不敏感的匹配。
+	g 	执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。
+	m 	执行多行匹配。
+	
+	******************************	方括号	******************************
+	说明：方括号用于查找某个范围内的字符
+	
+	[abc] 	查找方括号之间的任何字符。
+	[^abc] 	查找任何不在方括号之间的字符。
+	[0-9] 	查找任何从 0 至 9 的数字。
+	[a-z] 	查找任何从小写 a 到小写 z 的字符。
+	[A-Z] 	查找任何从大写 A 到大写 Z 的字符。
+	[A-z] 	查找任何从大写 A 到小写 z 的字符。
+	[adgk] 	查找给定集合内的任何字符。
+	[^adgk] 	查找给定集合外的任何字符。
+	(red|blue|green) 	查找任何指定的选项,用于匹配单词。 
+	
+	******************************	元字符	******************************
+	
+	说明：元字符是拥有特殊含义的字符
+	
+	. 	查找单个字符，除了换行和行结束符。
+	\w 	查找单词字符。
+	\W 	查找非单词字符。
+	\d 	查找数字。
+	\D 	查找非数字字符。
+	\s 	查找空白字符。
+	\S 	查找非空白字符。
+	\b 	匹配单词边界。
+	\B 	匹配非单词边界。
+	\0 	查找 NUL 字符。
+	\n 	查找换行符。
+	\f 	查找换页符。
+	\r 	查找回车符。
+	\t 	查找制表符。
+	\v 	查找垂直制表符。
+	\xxx 	查找以八进制数 xxx 规定的字符。
+	\xdd 	查找以十六进制数 dd 规定的字符。
+	\uxxxx 	查找以十六进制数 xxxx 规定的 Unicode 字符。
+	
+	
+	******************************	量词	******************************
+		
+	n+ 	匹配任何包含至少一个 n 的字符串。
+	n* 	匹配任何包含零个或多个 n 的字符串。
+	n? 	匹配任何包含零个或一个 n 的字符串。
+	n{X} 	匹配包含 X 个 n 的序列的字符串。
+	n{X,Y} 	匹配包含 X 或 Y 个 n 的序列的字符串。
+	n{X,} 	匹配包含至少 X 个 n 的序列的字符串。
+	
+	n$ 	匹配任何结尾为 n 的字符串。
+	^n 	匹配任何开头为 n 的字符串。
+	
+	?=n 	匹配任何其后紧接指定字符串 n 的字符串。
+	?!n 	匹配任何其后没有紧接指定字符串 n 的字符串。
+
+
+	******************************	实例属性	******************************
+
+	//////////////////////////////////////////////////////////////////////
+	
+	multiline 		对象是否具有标志 m。	
+	ignoreCase 		对象是否具有标志 i。 		
+	global 			对象是否具有标志 g。		
+	说明:如果 m/i/g 标志被设置，则该属性为 true，否则为 false。
+	
+	实例:
+	var str = "Visit W3School.com.cn";
+	var patt1 = new RegExp("W3");	
+	if(patt1.global)
+	  {
+	  alert("对象设置了全局匹配");
+	  }
+	else
+	  {
+	  alert("对象没有设置全局匹配");
+	  }
+	  
+	//////////////////////////////////////////////////////////////////////
+		
+	source 	正则表达式的源文本。
+	
+	实例:
+	var str = "Visit W3School.com.cn";
+	var patt1 = new RegExp("W3S","g"); //patt1.source == W3S 
+	
+	//////////////////////////////////////////////////////////////////////
+	
+	lastIndex 	用于规定下次匹配的起始位置。	
+	重要事项：不具有标志 g 和不表示全局模式的 RegExp 对象不能使用 lastIndex 属性。
+	
+	实例:
+	var str = "The rain in Spain stays mainly in the plain";
+	var patt1 = new RegExp("ain", "g");
+	
+	for(i = 0; i < 4; i++) 
+	  {
+	  patt1.test(str)
+	  document.write("ain found. index now at: " + patt1.lastIndex);
+	  document.write("<br />");
+	  }
+	  
+	******************************	实例方法	******************************
+	
+	//////////////////////////////////////////////////////////////////////
+	compile(regexp,modifier)	方法也可用于改变和重新编译正则表达式	
+	参数:
+	regexp 		正则表达式。
+	modifier 	规定匹配的类型。"g" 用于全局匹配，"i" 用于区分大小写，"gi" 用于全局区分大小写的匹配。
+	
+	实例:在字符串中全局搜索 "man"，并用 "person" 替换。然后通过 compile() 方法，改变正则表达式，用 "person" 替换 "man" 或 "woman"
+	
+	var str="Every man in the world! Every woman on earth!";
+	patt=/man/g;
+	str2=str.replace(patt,"person");
+	document.write(str2+"<br />");	
+	patt=/(wo)?man/g;
+	patt.compile(patt);
+	str2=str.replace(patt,"person");
+	document.write(str2);
+		
+	//////////////////////////////////////////////////////////////////////
+	
+	exec(string) 方法用于检索字符串中的正则表达式的匹配。	
+	参数: 	string 	必需。要检索的字符串。	
+	重要事项：	如果在一个字符串中完成了一次模式匹配之后要开始检索新的字符串，就必须手动地把 lastIndex 属性重置为 0。
+	提示：	请注意，无论 RegExpObject 是否是全局模式，exec() 都会把完整的细节添加到它返回的数组中。
+			在循环中反复地调用 exec()方法是唯一一种获得全局模式的完整模式匹配信息的方法。
+	
+	实例:	
+	var str = "Visit W3School, W3School is a place to study web technology."; 
+	var patt = new RegExp("W3School","g");
+	var result;
+	
+	while ((result = patt.exec(str)) != null)  {
+	  document.write(result);
+	  document.write("<br />");
+	  document.write(patt.lastIndex);
+	  document.write("<br />");
+	 }
+	
+	//////////////////////////////////////////////////////////////////////
+	
+	test(string) 方法用于检测一个字符串是否匹配某个模式.	
+	说明: 如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。
+	
+	实例:
+	var str = "Visit W3School";
+	var patt1 = new RegExp("W3School");	
+	var result = patt1.test(str);	
+	document.write("Result: " + result); 
+	
+	******************************	支持正则表达式的 String 对象的方法	******************************
+	
+	/////////////////////////////////////////////////
+	
+	stringObject.search(regexp) 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。		
+	说明 : search() 方法不执行全局匹配，它将忽略标志 g。它同时忽略 regexp 的 lastIndex 属性，并且总是从字符串的开始进行检索，这意味着它总是返回 stringObject 的第一个匹配的位置。
+		 search() 对大小写敏感,要执行忽略大小写的检索，请追加标志 i。	
+	返回值: stringObject 中第一个与 regexp 相匹配的子串的起始位置。如果没有找到任何匹配的子串，则返回 -1。
+	
+	实例：
+	var str="Visit W3School!"
+	document.write(str.search(/w3school/i)) //输出 6
+		
+	/////////////////////////////////////////////////
+	stringObject.match(regexp)	可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。	
+	返回值: 存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。如果没有找到任何匹配的文本， 将返回 null。
+		
+	实例: 
+	var str="Hello world!"
+	document.write(str.match("world") + "<br />")	//world
+	document.write(str.match("World") + "<br />")	//null
+	document.write(str.match("worlld") + "<br />")	//null
+	document.write(str.match("world!"))				//world!
+		
+		
+	/////////////////////////////////////////////////
+	stringObject.replace(regexp/substr,replacement)	用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。		
+	参数:		regexp/substr 	必需。规定子字符串或要替换的模式的 RegExp 对象。
+			replacement 	必需。一个字符串值。规定了替换文本或生成替换文本的函数。		
+	说明:		如果 regexp 具有全局标志 g，那么 replace() 方法将替换所有匹配的子串。否则，它只替换第一个匹配子串。
+		
+	实例:
+	var str="Visit Microsoft!"
+	document.write(str.replace(/Microsoft/, "W3School"))	//Visit W3School!
+		
+		
+	/////////////////////////////////////////////////		
+	stringObject.split(separator,howmany)	方法用于把一个字符串分割成字符串数组。
+		
+	参数:		separator 	必需。字符串或正则表达式，从该参数指定的地方分割 stringObject。
+			howmany 	可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。
+		
+	说明:		如果把空字符串 ("") 用作 separator，那么 stringObject 中的每个字符之间都会被分割。
+				
+	实例
+	"hello".split("")		//可返回 ["h", "e", "l", "l", "o"]
+	"hello".split("", 3)	//可返回 ["h", "e", "l"]
+	"2:3:4:5".split(":")	//将返回["2", "3", "4", "5"]
+	"|a|b|c".split("|")		//将返回["", "a", "b", "c"]
+		
+			
+-->
+	</body>
+</html>

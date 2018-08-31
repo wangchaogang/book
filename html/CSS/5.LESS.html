@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+		<style type="text/css">
+			.one {
+				display: flex;
+				justify-content: space-around;
+			}
+			a {
+				width:22%;
+				display: block;
+				height: 50px ;
+				background: red;
+			}
+			
+			.one a:target {
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+		********************	变量		********************
+		@nice-blue: #5B83AD;
+		@light-blue: @nice-blue + #111;
+		
+		#header {
+		  color: @light-blue;
+		}
+		
+		********************	混合		********************
+		/////////////////////////////////////////////////
+		不带参数混合
+		
+		说明：编译后，在CSS里显示
+		.bordered {
+		  border-top: dotted 1px black;
+		  border-bottom: solid 2px black;
+		}
+				
+		#menu a {
+		  color: #111;
+		  .bordered;
+		}
+		
+		编译后:
+		#menu a {
+		  color: #111;
+		  border-top: dotted 1px black;
+		  border-bottom: solid 2px black;
+		}
+		
+		
+		/////////////////////////////////////////////////
+		带参数混合
+		说明：编译后，不在CSS中显示
+		.bordered(@c1:red;@f2:15px) {
+			font-size:@f2;
+			color:@c1;
+		  	border-top: dotted 1px black;
+		  	border-bottom: solid 2px black;
+		}
+		
+		编译后:
+		.post a {
+		  	color: red;
+		  	font-size:15px;
+			color:red;
+		  	border-top: dotted 1px black;
+		  	border-bottom: solid 2px black;
+		}
+		
+		********************	嵌套		********************
+
+		#header {
+		  color: black;
+		  .navigation {
+		    font-size: 12px;
+		  }
+		  .logo {
+		    width: 300px;
+		  }
+		}
+		
+		编译后:
+		#header {
+		  color: black;
+		}
+		#header .navigation {
+		  font-size: 12px;
+		}
+		#header .logo {
+		  width: 300px;
+		}
+	
+		/////////////////////////////////////////////////////
+		&代表当前选择的元素
+		
+		.clearfix {
+		  display: block;
+		  zoom: 1;
+		
+		  &:after {
+		    content: " ";
+		    display: block;
+		    font-size: 0;
+		    height: 0;
+		    clear: both;
+		    visibility: hidden;
+		  }
+		}
+		
+		编译后:
+		.clearfix {
+		  display: block;
+		  zoom: 1;
+		}
+		
+		。clearfix:after {
+		    content: " ";
+		    display: block;
+		    font-size: 0;
+		    height: 0;
+		    clear: both;
+		    visibility: hidden;
+		}
+		********************	运算		********************
+		任何数字、颜色或者变量都可以参与运算。
+		@base: 5%;
+		@filler: @base * 2;
+		@other: @base + @filler;
+		
+		color: #888 / 4;
+		background-color: @base-color + #111;
+		height: 100% / 2 + @filler;
+		
+		
+		********************	导入		********************
+		和你预期的工作方式一样。你可以导入一个 .less 文件，此文件中的所有变量就可以全部使用了。如果导入的文件是 .less 扩展名，则可以将扩展名省略掉：
+		@import "library"; // library.less
+		@import "typo.css";
+		
+		-->
+		<div class="one">
+		<A href="#a1" ></A>
+		<A href="#a2" id="a2"></A>
+		<A href="#a3" id="a3"></A>
+		<A href="#a4" id="a4"></A>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+1：如何选中div元素下所有带.one样式的P元素
+  div p[class="one"]
+2：如何选中div下所有的奇数行p元素
+  div p:nth-child(2n+1)
+3：如何选中第三个p元素
+  p:nth-of-type(3)
+4：如何使用after给一个100*100的div加上半透明的黑色蒙层
+  div:after{
+     content:"";
+     display:block;
+     width:100px;
+     height:100px;
+     background:#000;
+     opacity:0.5;
+  }
+5：如何给一个div加上鼠标移入颜色从红变蓝的过度效果
+   div{
+  background:red;
+  transition:all 1s;
+}
+div:hover{
+  background:blue;
+}
+6：如何使用弹性盒子，制作一个3列4行的列表
+div{
+   width:1000px;
+   display:flex；
+   flex-wrap：wrap；
+   justify-content：space-around
+}
+z{
+  width：300px；
+  
+}
+7：如何给一个100*100的div加上一个动画，动画要求时间为3秒，div先从正方形变为圆，之后把圆放大到1.5倍
+ animation @keyframes
+8：列出display的至少6个值
+ block inline inline-block flex none inderit
+
+9：阴影属性有几个值，详细列出
+
+  box-shadow：x y 阴影大小 模糊大小 颜色 内阴影；
+
+10：说明3种水平垂直居中的方式
+1，position：absolute； top：50%；left：50%；margin：50px 0 0 50px；
+2 text-align：center； line-height：100%； 子：display：inline-block
+3 父display：flex 子：margin：auto；
+
+11：定义盒模型外部有哪8中属性
+box-sizing  border padding margin outline box-shadow min/max-height
+
+12：定义盒模型整体有哪些属性
+display visibility
+
+13：在css中定位的方式有哪几种
+position：relative absolute fixed

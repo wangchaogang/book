@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.one {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-around;
+				margin-top: 20px;
+			}
+			
+			.one svg {
+				display: block;
+				width: 22%;
+				height: 200px;
+				border: 1px solid #d7d7d7;
+				margin-top: 15px;
+			}
+			
+			.two {
+				fill: red;
+				stroke: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!----------------------------------------------------
+			
+		*--------------		SVG的两个作用		-----------------*
+		
+		************************	构图		************************
+		rect 矩形	
+			//<rect class="two" height="100" width="150" x="15" y="20"></rect>
+		
+		circle 圆形
+			//<circle class="two" cx="100" cy="100" r="99"></circle>
+		
+		ellipse 椭圆 
+			//<ellipse class="two" cx="100" cy="100" rx="50" ry="99"></ellipse>
+			
+		line 线 
+			//<line class="two" x1="0" y1="0" x2="200" y2="55"></line>
+						
+		polyline 折线 
+			//<polyline class="two" points="0,0 50,20 46,33 150,200"></polyline>
+		
+		polygon	多边形
+			//<polygon class="two" points="0,0 50,20 46,33 150,200"></polygon>
+			
+			
+		path 路径(大写字母表示绝对定位，小写字母表示相对定位)
+			//相对定位是相对上一组的x和y的值
+			 	M 	moveto		移动到 	(x y)+
+				Z 	closepath	关闭路径 	(none)
+				L 	lineto ?		画线到 	(x y)+
+				H 	horizontal lineto		水平线到 	x+
+				V 	vertical lineto 		垂直线到 	y+
+				C 	curveto 			三次贝塞尔曲线到 	(x1 y1 x2 y2 x y)+
+				S 	smooth curveto	光滑三次贝塞尔曲线到 	(x2 y2 x y)+
+				Q 	quadratic Bézier curveto 		二次贝塞尔曲线到 	(x1 y1 x y)+
+				T 	smooth quadratic Bézier curveto	光滑二次贝塞尔曲线到 	(x y)+
+				A 	elliptical arc	椭圆弧 	(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+
+				R 	曲线 	x1 y1 (x y)+
+		
+		
+		text 文字
+			//<text class="two" x="100" y="100">这是文字</text>
+			
+		image 图片
+			//height , width , xlink:href 这3个是必须的属性
+			//<image xlink:href="../../img/te1.jpg" x="10" y="10" height="100" width="100"></image>
+			
+		linearGradient 	线性渐变 
+		radialGradient	放射性渐变 
+		
+		
+		...*****************	描边与填充  (应用在CSS中) 	****************....
+		
+		fill(填充颜色) = "red";
+		
+		stroke(描边颜色) = "red";             	     
+		stroke-width(描边粗细) = "5" 不加单位，单位默认是px               
+		stroke-dasharray(描边中间样式) = "20,10,5,5,5,10" 带断点的虚线线条
+    	stroke-linecap(描边两段样式) = "butt(矩形)" / "round(圆)" / "square(圆角)"
+
+		
+		************************	动画		************************
+		
+		动画的全局属性
+		
+		form(起始属性) = "10"
+		to(绝对终止属性) = "100"   最终的属性为100
+		by(相对终止属性)	= "100"	  	最终的属性为110
+		values(一组变化的属性) = "10;50;20;180"	起始值为10，然后运行到50，之后再到20，最后到180
+				
+		dur(动画的持续时间) = "5s"
+		
+		calcMode(动画的变化快慢) = discrete | linear | paced | splin；
+		keyTimes(动画的时间分布) = "1s,1.2s"//与values(一组变化的属性)一起使用，代表每个变化用多长事件，总比values少一个值
+		
+		begin(动画开始条件)
+			begin="x.end"  等到ID名为x的动画结束后触发该动画
+	
+			begin="x.end + 2"	等到ID名为x的动画结束后2秒后触发该动画
+	
+			begin="obj.click"	当ID名为obj的"元素"被点击后触发
+	
+			begin="x.repeat(2)"		当ID名为x的动画运行2次后触发
+	
+			begin="accessKey(s)"	当键盘上的“s”键被点击后触发
+	
+			begin= "indefinite";	无限等待，通过其他事件触发
+					
+		fill(动画停止后状态)= freeze (冻结，元素保持了动画结束之后的状态 )  / remove (默认值，表示动画结束直接回到开始的地方)
+	
+		repeatCount(动画播放次数) = "indefinite"(无限循环)  / 2 (动画播放两次)
+		
+		repeatDur(动画播放时长) ="10s" (10秒后动画停止)	
+	
+		accumulate ="sum"	表示动画结束时候的位置作为下次动画的起始位置
+	
+		additive ="sum"		表示动画的基础知识会附加到其他低优先级的动画上
+	
+		restart(重置动画)	= always(任何时候都可以重置动画) | whenNotActive(动画运行中不可以重置动画) | never(只能重置一次动画)
+	
+		
+		
+		<animate>   随时间动态改变属性
+			特有属性：attributeName="目标属性名称"
+			
+		<animateMotion>  使元素沿着动作路径移动
+			特有属性：xlink:href="一个URI引用<path>元素，它定义运动路径"
+					keyPoints="沿运动路径的对象目前时间应移动多远"
+					rotate="应用旋转变换"
+					path="运动路径"
+					
+		<animateTransform> 动画上一个目标元素变换属性，从而使动画控制平移，缩放，旋转或倾斜
+			特有属性：type = 'translate(偏移)', 'scale(缩放)', 'rotate(旋转)', 'skewX(按X轴变形)', 'skewY(按Y轴变形)'
+			使用时必须加上 attributeName="transform"
+		----------------------------------------------------->
+		<div class="one">
+			<svg>
+				<!--矩形-->
+				<rect class="two" height="100" width="150" x="15" y="20"></rect>
+			</svg>
+			<svg>
+				<!--圆形-->
+				<circle class="two" cx="100" cy="100" r="99"></circle>
+			</svg>
+			<svg>
+				<!--椭圆-->
+				<ellipse class="two" cx="100" cy="100" rx="50" ry="99"></ellipse>
+			</svg>
+			<svg>
+				<!--线段-->
+				<line class="two" x1="0" y1="0" x2="200" y2="55"></line>
+			</svg>
+			<svg>
+				<!--多线段-->
+				<polyline class="two" points="0,0 50,20 46,33 150,200"></polyline>
+			</svg>
+			<svg>
+				<!--多边形-->
+				<polygon class="two" points="0,0 50,20 46,33 150,200"></polygon>
+			</svg>
+
+			<svg>
+				<!--路径-->
+				<path class="two" d="M0,100 q50,-50 100,0 c50,-100 70,100 150,120 Z"></path>
+			</svg>
+			<svg>
+				<!--文字-->
+				<text class="two" x="100" y="100">这是文字</text>
+			</svg>
+			<svg>
+				<!--图片-->
+				<image xlink:href="../../img/te1.jpg" x="10" y="10" height="100" width="100"></image>
+			</svg>
+			<svg>
+				<!--
+					线性渐变
+					渐变颜色范围可以由两个或两个以上的颜色组成。每种颜色用一个<stop>标签指定。offset属性用来定义渐变色开始和结束 
+					当y1和y2相等，而x1和x2不同时，可创建水平渐变 
+					当x1和x2相等，而y1和y2不同时，可创建垂直渐变 
+					当x1和x2不同，且y1和y2不同时，可创建角形渐变 
+				-->
+				<defs>
+					<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+						<stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+					</linearGradient>
+				</defs>
+				<rect fill="url(#grad1)" height="100" width="150" x="15" y="20"></rect>
+			</svg>
+			<svg>
+				<!--
+					径向渐变
+					<radialGradient>标签的 id 属性可为渐变定义一个唯一的名称 
+					CX，CY和r属性定义的最外层圆和Fx和Fy定义的最内层圆 
+					渐变颜色范围可以由两个或两个以上的颜色组成。每种颜色用一个<stop>标签指定。offset属性用来定义渐变色开始和结束 
+					填充属性把ellipse元素链接到此渐变 
+				-->
+				<defs>
+					<radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+						<stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:0" />
+						<stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+					</radialGradient>
+				</defs>
+				<ellipse cx="200" cy="70" rx="85" ry="55" fill="url(#grad2)" />
+			</svg>
+
+			<svg>
+				<!--属性动画-->
+				<rect class="two" height="100" width="150" x="15" y="20">
+					<animate attributeName="width" dur="3s" repeatCount="indefinite" values="0;200"></animate>
+				</rect>
+			</svg>
+			<svg>
+				<!--路径动画-->
+				<text class="two" x="20" y="20">文字
+					<animateMotion dur="3s" path="M20,20 q30,-50 100,50" rotate="auto" repeatCount="indefinite">
+				</text>
+				<path class="two" d="M20,20 q30,-50 100,50"></path>
+			</svg>
+			<svg>
+				<!--2D转换动画-->
+				<rect class="two" height="100" width="150" x="15" y="20">
+					<animateTransform attributeName="transform" type="scale" values="0;1.5;0.8" dur="3s" repeatCount="indefinite"></animateTransform>
+				</rect>
+			</svg>
+			<svg></svg>
+			<svg></svg>
+		</div>
+
+	</body>
+
+</html>

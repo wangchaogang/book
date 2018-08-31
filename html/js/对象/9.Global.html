@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		<!--
+			
+			
+			1.全局对象拥有一些常用的属性值。比如undefined、Infinity以及NaN。
+			2.全局对象拥有一些常用的属性对象。比如Math、JSON和Number对象均为该全局对象的属性。
+			3.全局对象提供一些全局函数供调用。比如isNaN()、isFinite()、parseInt()和eval()等。
+			4.全局对象提供一些全局构造器(constructor)，也即全局类。比如Date()、RegExp()、String()、Object()和Array()等。
+			
+			
+			说明：
+			1：	除了JS全局对象，对于运行在浏览器端的JavaScript程序，还有另一个全局对象：window。
+				window全局对象提供了与当前窗口、页面有关的诸多属性与方法。
+				除了这些与浏览器有关的全局属性和方法，window对象还封装了JS全局对象，并向外暴露JS全局对象的属性与接口；
+				因此，当进行浏览器端JavaScript编程时，只需关心window全局对象即可。
+
+			2：	对于JavaScript程序中的this，如果this不属于任何function，那么这个this就指代JS全局对象；
+				如果是浏览器端运行的JS程序，那么这个this就指代window全局对象。
+			
+			3：	如果在JavaScript程序中创建了全局变量，那么这个全局变量会成为全局对象中的一个属性。
+			
+			
+			
+			************************************	     全局对象方法		*********************************************
+			
+			///////////////////////////////////////////////////////////////////////////
+			
+			encodeURI() 			把字符串编码为 URI。
+			decodeURI() 			解码某个编码的 URI。			
+			
+			encodeURIComponent() 	把字符串编码为 URI 组件。
+			decodeURIComponent() 	解码一个编码的 URI 组件。
+						
+			例：
+			var url = "http://www.baidu.com"；
+			var a = encoderURIComponent(url);   //http%3A%2F%2Fwww.baidu.com	对URL进行编码		
+			var b = decoderURIComponent(a);		//htttp:www.baidu.com			对URL进行解码
+			
+			///////////////////////////////////////////////////////////////////////////
+			escape() 		对字符串进行编码。
+			unescape() 		对由 escape() 编码的字符串进行解码。
+			说明：对特殊符号进行编码或解码
+			
+			例：			
+			var a = escape("Visit W3School!")				//Visit%20W3School%21
+			var a1 = escape("?!=()#%&")						//%3F%21%3D%28%29%23%25%26
+			unescape(a) 									//Visit W3School!
+			
+			///////////////////////////////////////////////////////////////////////////
+			eval()  	计算Javascript代码串,返回结果
+			
+			例：
+			eval("alert('123')");
+						
+			///////////////////////////////////////////////////////////////////////////
+			isFinite() 		检查某个值是否为有穷大的数。
+			isNaN() 		检查某个值是否是数字。
+						
+			Number() 		把对象的值转换为数字。
+			String() 		把对象的值转换为字符串。
+			
+			parseFloat() 	解析一个字符串并返回一个浮点数。
+			parseInt() 		解析一个字符串并返回一个整数。
+			
+
+		-->
+	</body>
+</html>

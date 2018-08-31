@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css" />
+
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<!--   引入Angular文件    -->
+		<script src="js/angular-1.5.8/angular.min.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<h2>AngularJS应用示例</h2>
+		<div ng-app="mainApp" ng-controller="studentController">
+
+			Enter first name: <input type="text" ng-model="student.firstName"><br><br> Enter last name: <input type="text" ng-model="student.lastName"><br>
+			<br> 您输入的名字是: {{student.fullName()}}
+		</div>
+		<script>
+			var mainApp = angular.module("mainApp", []);
+
+			mainApp.controller('studentController', function($scope) {
+				$scope.student = {
+					firstName: "李",
+					lastName: "刚",
+					fullName: function() {
+						var studentObject;
+						studentObject = $scope.student;
+						return studentObject.firstName + " " + studentObject.lastName;
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

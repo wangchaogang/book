@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+	
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../svg/font.css" />
+
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style type="text/css">
+			svg {
+				height: 600px;
+				width: 600px;
+				border: 1px solid black;
+				display: block;
+				margin: 50px auto;
+			}
+			
+			rect {
+				stroke: black;
+				stroke-width: 1px;
+				stroke-linejoin: round;
+				height: 200px;
+				width: 200px;
+				fill: red;
+				color: #fff;
+				z-index: 1;
+			}
+			
+			g:first-child rect {
+				fill: #fff;
+				stroke: none;
+				z-index: -1;
+			}
+			
+			text {
+				fill: #fff;
+				font-size: 40px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<svg>
+			<g>
+				<rect id="move" x="400" y="400">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+			</g>
+			<g>
+				<rect x="0" y="0">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="80" y="100">5
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+			</g>
+			<g>
+				<rect x="200" y="0">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="280" y="100">1
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="400" y="0">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="480" y="100">2
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="0" y="200">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="80" y="300">6
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="200" y="200">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="280" y="300">4
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="400" y="200">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="480" y="300">7
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="0" y="400">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="80" y="500">8
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+
+			</g>
+			<g>
+				<rect x="200" y="400">
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive" />
+				</rect>
+				<text x="280" y="500">3
+					<animate dur="0.5s" fill="freeze" restart="whenNotActive"/> 
+				</text>
+			</g>
+
+		</svg>
+		<script type="text/javascript">
+			var obj = document.getElementsByTagName("svg")[0],
+				noneObj = document.getElementById("move"),
+				noneAni = noneObj.getElementsByTagName("animate")[0];
+				
+			obj.addEventListener("click", move, false);
+
+			function move(e) {
+				var nowObj = e.target,
+					ani = nowObj.getElementsByTagName("animate")[0], //获取当前点击的元素;
+					tet = nowObj.parentNode.getElementsByTagName("text")[0],
+					tet1 = tet.getElementsByTagName("animate")[0],
+					textX = tet.getAttribute("x"),
+					textY = tet.getAttribute("y"),
+					nullX = noneObj.getAttribute("x"),
+					nullY = noneObj.getAttribute("y"),
+					nowX = nowObj.getAttribute("x"),
+					nowY = nowObj.getAttribute("y"),
+					x = nullX - nowX,
+					y = nullY - nowY;
+
+				if(Math.abs(x) <= 200 && y == 0) { //横向移动
+					
+					noneAni.setAttribute("attributeName", "x");
+					noneAni.setAttribute("to", nowX);
+					noneAni.beginElement();
+
+					tet1.setAttribute("attributeName", "x");
+					tet1.setAttribute("to", parseInt(nullX) + 80);
+					tet1.beginElement();
+
+					ani.setAttribute("attributeName", "x");
+					ani.setAttribute("to", nullX);
+					ani.beginElement();
+					
+					setTimeout(function() {
+						nowObj.setAttribute("x", nullX);
+						noneObj.setAttribute("x", nowX);
+						tet.setAttribute("x", parseInt(nullX) + 80);
+
+					}, 500);
+				} else if(Math.abs(y) <= 200 && x == 0) { //纵向移动
+
+					noneAni.setAttribute("attributeName", "y");
+					noneAni.setAttribute("to", nowY);
+					noneAni.beginElement();
+					
+					tet1.setAttribute("attributeName", "y");
+					tet1.setAttribute("to", parseInt(nullY) + 100);
+					tet1.beginElement();
+
+					ani.setAttribute("attributeName", "y");
+					ani.setAttribute("to", nullY);
+					ani.beginElement();
+					
+					setTimeout(function() {
+						nowObj.setAttribute("y", nullY);
+						noneObj.setAttribute("y", nowY);
+						tet.setAttribute("y", parseInt(nullY) + 100);
+					}, 500);
+					
+				} else {
+					return;
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,72 @@
+8<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<style type="text/css">		
+		/*----------------------------------------------------------------------
+		
+		 直接选择器		p标签选择								例:p{....}		
+					.class样式选择；						例:.one{....}		
+					#id ID选择 							例:#one{...}
+		
+		同辈选择器		div+p,选择紧跟着的第一个p元素				例:div+p {....};		
+					div~p,选择所有同辈p元素  					例:div~p{....}
+		
+		子元素选择器	div p,选择div下的所有p元素				例:div p {....};	
+					div>p,只选择向下一级						例:div>p {....};	
+		
+		集合选择器		:first-child,选择集合中的第一个元素  		例:div p:first-child{....}
+					:last-child,选择集合中的最后一个元素		例:div p:last-child{....}
+					:nth-last-child(n),从后向前选择第n个元素	例:div p:nth-last-child(2){....}
+					:only-of-type,选择元素中仅有一个元素		例:p:only-of-type{.....}父级只有一个P元素					
+					:nth-child(n/2n/2n+1)
+					选择第n个元素							例:div p:nth-child(2){....}
+					2n选择集合中的偶数						例:div p:nth-child(2n){....}
+					2n+1 选择集合众的奇数 						例:div p:nth-child(2n+1){....}
+					
+		属性选择器		[attr]，选择具有该属性的元素				例:[src]{....}		
+					[attr = val],选择属性值完全相等的元素		例:[class="one"]{....}
+					[attr ~= val],选择属性包含单词的元素		例:[src~="nema"]{....}
+					[attr |= val],选择起始值包含单词的元素		例:[src|="nema"]{....}
+					[attr $= val],选择以字符串结尾的元素		例:[src$="jpj"]{....}
+					[attr ^= val],选择以字符串开头的元素		例:[src^="on"]{....}				
+					[attr *= val],选择包含字符串的元素			例:[src*="on"]{....}	
+		
+		伪类			:hover,选择鼠标在链接上面时				例:a:link{...}
+					:active,选择活动链接					例:a:active{...}
+					:visited,选择所有访问过的链接				例:a:visited{...}
+					:link,选择所有未访问链接					例:a:link{...}
+					:empty,选择每个没有任何子级的p元素			例:p:empty{...}
+					:target,目标伪类，href属性和ID配合			例:p:target {...}
+					
+					:focus,选择具有焦点的输入元素				例:input:focus{...}					
+					:valid,用于匹配输入值为合法的元素			例:input:valid{...}
+					:invalid,用于匹配输入值为非法的元素			例:input:invalid{...}
+					:enabled,选择每一个已启用的输入元素			例:input:enabled{...}
+					:disabled,选择每一个禁用的输入元素			例:input:disabled{...}
+					:out-of-range,值在指定区间之外的input元素	例:input:out-of-range{...}
+					:in-range,匹配值在指定区间之内的input元素	例:input:in-range{...}
+
+					//以下伪类兼容性不好，且用处不大
+					::selection,被用户选中或处于高亮状态的部分	例: ::selection{...}					
+					:read-write,用于匹配可读及可写的元素		例:input:read-write{...}
+					:read-only,用于匹配设置 "readonly"元素	例:input:read-only{...}
+		
+		
+		伪元素		:first-letter,选择第一个字符				例:p:first-letter{...}
+					:first-line,选择第一行 					例:p:first-line{...}
+					:after,向元素之前插入内容					例:div:after{...}
+					:before,向元素之后插入内容				例:div:before{...}
+					
+		----------------------------------------------------------------------*/		
+		</style>
+	</head>
+
+	<body>
+		
+
+	</body>
+
+</html>

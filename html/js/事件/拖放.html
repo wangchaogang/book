@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<style type="text/css">
+			#two {
+				width: 350px;
+				height: 400px;
+				padding: 10px;
+				border: 1px solid #aaaaaa;
+				margin: 0 auto;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="one" draggable="true">ssssssssss</div>
+		<div id="two"></div>
+		<script>
+			function $(id1, id2) {
+				//获取函数传进来几个参数
+				var len = arguments.length;
+
+				//获取id名为第一个参数的对象
+				var $this = document.getElementById(id1);
+
+				//判断传进来几个参数，如果传进来的参数数量大于1，则设置为页面内拖放，如果小于等于1，则设置为页面外部拖放
+				if(len > 1) {
+					//获取id名为第二个参数的对象
+					var $this_1 = document.getElementById(id2);
+
+					//给被拖放元素设置绑定拖放开始事件
+					$this_1.addEventListener("dragstart", one, true);
+					//给容器元素设置绑定拖放停止事件
+					$this.addEventListener("dragover", two, true);
+					//给容器元素设置绑定拖放完成事件
+					$this.addEventListener("drop", three, true);
+				} else {
+
+					//拖放初始化，取消其他默认事件
+					$this.addEventListener("dragleave", function(e) {
+							e.preventDefault();
+						})
+						//拖放初始化，取消其他默认事件
+					$this.addEventListener("dragenter", function(e) {
+							e.preventDefault();
+						})
+						//拖放初始化，取消其他默认事件
+					$this.addEventListener("dragover", function(e) {
+							e.preventDefault();
+						})
+						//设置拖放完成执行的动作
+					$this.addEventListener("drop", function(e) {
+						e.preventDefault();
+
+						//获取当前被拖放的外部文件，返回的是一个数组，这个数组中存放着所有被拖放的元素
+						var fileList = e.dataTransfer.files;
+						for(var i = 0, len = fileList.length; i <= len - 1; i++) {
+							//获取被拖放的外部元素的url
+							var src = window.webkitURL.createObjectURL(fileList[i]);
+							//定义一个Img标签
+							var str = "<img src='" + src + "'>";
+							//将定义好的img标签添加到id名为two的里面
+							document.getElementById("two").innerHTML += str;
+						}
+
+					}, false);
+				}
+				//被拖放元素的事件，存放一个变量，变量名为ss,变量的值为当前元素的id
+				function one(ev) {
+					ev.dataTransfer.setData("ss", ev.target.id);
+				}
+				//拖放停止后，清除默认动作
+				function two(ev) {
+					ev.preventDefault();
+				}
+				//鼠标松开，拖放完成，清除默认动作，获取之前ss变量，将变量值为ss的元素放进容器中
+				function three(ev) {
+					ev.preventDefault();
+					var data = ev.dataTransfer.getData("ss");
+					ev.target.appendChild(document.getElementById(data));
+				}
+			}
+			$("two");
+		</script>
+	</body>
+
+</html>

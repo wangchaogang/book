@@ -1,0 +1,60 @@
+1：通过string对象截取身份证号码中代码出生日期的代码
+   arr.substr(6,8)
+
+2：如何替换字符串中以a开头以9结尾的所有字符，并将其替换为my
+   alert(a.replace(/[a,9]/g,'deg'))
+
+3：如何让数组从小到大排列和从大到小排列
+    arr.sort(function(a1,a2){return a1-a2})从小到大
+    arr.sort(function(a1,a2){return a2-a1})从大到小
+
+4：如何随机数组中的其中一个值
+   alert(arr[parseInt(Math.random()*arr.length)])
+
+5：面向对象的中this的取值都有哪些
+   window document  当前
+
+6：创建对象的方法有几种
+
+  6种 
+1 new object
+2 字面表达式
+3 工厂模式
+4 构造函数
+5 构造原型模式
+6 混合模式（构造+原型）
+
+
+7：如何对一个浮点数进行向上取整,向下取整，四舍五入取整
+Math.ceil() Math.floor()  Math.round()
+
+8:如何获取浮点数的整数部分
+   parseInt（）、Math.floor（）
+
+9：向数组["a","b","c","d"]中b的后面插入e,f，插入之后变为
+["a","b","e","f","c","d"]
+
+ var arr = ["a","b","c","d"]
+ arr.splice(1,0,'e','f')
+  alert(arr)
+
+10:如何把数组["a","b","c","d","e","f"]变成["c","f"]
+  var arr = ["a","b","c","d","e","f"]
+			arr.splice(0,2)
+			arr.splice(1,2)
+			alert(arr)
+11：如何把hello变成["h","e","l","l","o"]
+    alert(arr.split(''))
+12:遍历数组有几种方式
+   map() forEach() filter() every()
+13：列举出2中使用for In的例子
+  for(name in json){
+
+  }
+
+14：简述 if 和switch 的区别及其应用场景
+  if:是判断一个区间的数
+  switch，是判断某个数 case break
+
+15：js中有几种循环
+   for（）{ }  while(){} do{}while() for in

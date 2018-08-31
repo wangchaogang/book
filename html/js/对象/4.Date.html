@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第一个页面</title>
+		<!-- 设置手机端全屏显示，不允许出现滚动条  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+		<meta name="format-detection" content="telphone=no, email=no" />
+		
+		<!--  引入图标文件  -->
+		<link rel="stylesheet" type="text/css" href="../../css/svg/font.css"/>	
+		
+		<!--   样式加载    -->
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+	</head>
+	<body>
+		<!--
+		Date对象，是操作日期和时间的对象。Date对象对日期和时间的操作只能通过方法。
+				
+		***************************		构造函数		***************************
+	
+		////////////////////////////////////////////////
+		new Date() ：返回当前的本地日期和时间
+		例：	var dt = new Date();
+			console.log(dt); // => 返回一个表示本地日期和时间的Date对象
+			
+			
+		////////////////////////////////////////////////
+		new Date(milliseconds) ：把毫秒数转换为Date对象
+		例：	var dt = new Date(1000 * 60 * 1); // 前进1分钟的毫秒数
+			console.log(dt); // => {Date}:1970/01/01 08:01:00
+			dt = new Date(-1000 * 60 * 1); // 倒退1分钟的毫秒数
+			console.log(dt); // => {Date}:1970/01/01 07:59:00	
+			
+		////////////////////////////////////////////////
+		new Date(dateStr) ：把字符串转换为Date对象
+		例：	var dt = new Date('2014/12/25'); // yyyy/MM/dd
+			console.log(dt); // => {Date}:2014/12/25 00:00:00
+			dt = new Date('2014/12/25 12:00:00'); // yyyy/MM/dd HH:mm:ss
+			console.log(dt); // => {Date}:2014/12/25 12:00:00
+			 
+			dt = new Date('2014-12-25'); // yyyy-MM-dd
+			console.log(dt); // => {Date}:2014-12-25 08:00:00 (加上了东8区的时区)
+			dt = new Date('2014-12-25 12:00:00'); // yyyy-MM-dd HH:mm:ss (注意：此转换方式在IE中会报错！)
+			console.log(dt); // => {Date}:2014-12-25 12:00:00
+			
+		////////////////////////////////////////////////
+		new Date(year, month, opt_day, opt_hours, opt_minutes, opt_seconds, opt_milliseconds) ：把年月日、时分秒转换为Date对象
+		例：	var dt = new Date(2014, 11); // 2014年12月(这里输入的月份数字为11)
+			console.log(dt); // => {Date}:2014/12/01 00:00:00
+			dt = new Date(2014, 11, 25); // 2014年12月25日
+			console.log(dt); // => {Date}:2014/12/25 00:00:00
+			dt = new Date(2014, 11, 25, 15, 30, 40); // 2014年12月25日 15点30分40秒
+			console.log(dt); // => {Date}:2014/12/25 15:30:40
+			dt = new Date(2014, 12, 25); // 2014年13月25日(这里输入的月份数字为12，表示第13个月，跳转到第二年的1月)
+			console.log(dt); // => {Date}:2015/01/25	
+		
+		***************************		实例方法		***************************
+		
+		【get方法】
+		
+		getFullYear() ：返回Date对象的年份值；4位年份。
+		getMonth() ：返回Date对象的月份值。从0开始，所以真实月份=返回值+1 。
+		getDate() ：返回Date对象的月份中的日期值；值的范围1~31 。
+		getHours() ：返回Date对象的小时值。
+		getMinutes() ：返回Date对象的分钟值。
+		getSeconds() ：返回Date对象的秒数值。
+		getMilliseconds() ：返回Date对象的毫秒值。
+		getDay() ：返回Date对象的一周中的星期值；0为星期天，1为星期一、2为星期二，依此类推
+		getTime() ：返回Date对象与'1970/01/01 00:00:00'之间的毫秒值(北京时间的时区为东8区，起点时间实际为：'1970/01/01 08:00:00') 。
+				
+		例：	dt.getFullYear(); // => 2014：年
+			dt.getMonth(); // => 11：月；实际为12月份(月份从0开始计算)
+			dt.getDate(); // => 25：日
+			dt.getHours(); // => 15：时
+			dt.getMinutes(); // => 30：分
+			dt.getSeconds(); // => 40：秒
+			dt.getMilliseconds(); // => 333：毫秒
+			dt.getDay(); // => 4：星期几的值
+			dt.getTime(); // => 1419492640333 ：返回Date对象与'1970/01/01 00:00:00'之间的毫秒值(北京时间的时区为东8区，起点时间实际为：'1970/01/01 08:00:00')
+		
+		
+		【set方法】
+		
+		setFullYear(year, opt_month, opt_date) ：设置Date对象的年份值；4位年份。
+		setMonth(month, opt_date) ：设置Date对象的月份值。0表示1月，11表示12月。
+		setDate(date) ：设置Date对象的月份中的日期值；值的范围1~31 。
+		setHours(hour, opt_min, opt_sec, opt_msec) ：设置Date对象的小时值。
+		setMinutes(min, opt_sec, opt_msec) ：设置Date对象的分钟值。
+		setSeconds(sec, opt_msec) ：设置Date对象的秒数值。
+		setMilliseconds(msec) ：设置Date对象的毫秒值。
+		
+		例：	var dt = new Date();
+			dt.setFullYear(2014); // => 2014：年
+			dt.setMonth(11); // => 11：月；实际为12月份(月份从0开始计算)
+			dt.setDate(25); // => 25：日
+			dt.setHours(15); // => 15：时
+			dt.setMinutes(30); // => 30：分
+			dt.setSeconds(40); // => 40：秒
+			dt.setMilliseconds(333); // => 333：毫秒
+			console.log(dt); // =>  2014年12月25日 15点30分40秒 333毫秒
+		
+		////////////////////////////////////////////////
+		其他方法
+		oString() ：将Date转换为一个'年月日 时分秒'字符串
+		toLocaleString() ：将Date转换为一个'年月日 时分秒'的本地格式字符串
+		toDateString() ：将Date转换为一个'年月日'字符串
+		toLocaleDateString() ：将Date转换为一个'年月日'的本地格式字符串
+		toTimeString() ：将Date转换为一个'时分秒'字符串
+		toLocaleTimeString() ：将Date转换为一个'时分秒'的本地格式字符串
+		valueOf() ：与getTime()一样， 返回Date对象与'1970/01/01 00:00:00'之间的毫秒值(北京时间的时区为东8区，起点时间实际为：'1970/01/01 08:00:00') 
+		
+		例：	var dt = new Date();
+			console.log(dt.toString()); // => Tue Dec 23 2014 22:56:11 GMT+0800 (中国标准时间) ：将Date转换为一个'年月日 时分秒'字符串
+			console.log(dt.toLocaleString()); // => 2014年12月23日 下午10:56:11  ：将Date转换为一个'年月日 时分秒'的本地格式字符串			 
+			console.log(dt.toDateString()); // => Tue Dec 23 2014 ：将Date转换为一个'年月日'字符串
+			console.log(dt.toLocaleDateString()); // => 2014年12月23日 ：将Date转换为一个'年月日'的本地格式字符串			 
+			console.log(dt.toTimeString()); // => 22:56:11 GMT+0800 (中国标准时间) ：将Date转换为一个'时分秒'字符串
+			console.log(dt.toLocaleTimeString()); // => 下午10:56:11 ：将Date转换为一个'时分秒'的本地格式字符串		 
+			console.log(dt.valueOf()); // => 返回Date对象与'1970/01/01 00:00:00'之间的毫秒值(北京时间的时区为东8区，起点时间实际为：'1970/01/01 08:00:00') 
+		
+			
+		
+		***************************		静态方法		***************************
+		
+		////////////////////////////////////////////////
+		Date.now()返回当前日期和时间的Date对象与'1970/01/01 00:00:00'之间的毫秒值
+		例：console.log(Date.now()); // => 1419431519276 
+		
+		
+		////////////////////////////////////////////////
+		Date.parse(dateStr)把字符串转换为Date对象 ，然后返回此Date对象与'1970/01/01 00:00:00'之间的毫秒值		
+		例： console.log(Date.parse('2014/12/25 12:00:00')); // => 1419480000000
+			console.log(Date.parse('2014-12-25 12:00:00')); // => 1419480000000  (注意：此转换方式在IE中返回NaN！)
+		
+		
+		***************************		实际操作		***************************
+				
+		////////////////////////////////////////////////
+		获取倒计时
+		例： function getDownTime(dt) {
+		    // 1.获取倒计时
+		    var intervalMsec = dt - Date.now(); // 目的时间减去现在的时间，获取两者相差的毫秒数
+		    var intervalSec = intervalMsec / 1000; // 转换成秒数
+		    var day = parseInt(intervalSec / 3600 / 24); // 天数
+		    var hour = parseInt((intervalSec - day * 24 * 3600) / 3600); // 小时
+		    var min = parseInt((intervalSec - day * 24 * 3600 - hour * 3600) / 60); // 分钟
+		 
+		    // 2.若相差的毫秒小于0 ,表示目的时间小于当前时间，这时的取的值都是负的：-X天-时-分，显示时，只显示天数前面为负的就行。
+		    if (intervalMsec < 0) {
+		        hour = 0 - hour;
+		        min = 0 - min;
+		    }
+		 
+		    // 3.拼接字符串并返回
+		    var rs = day + '天' + hour + '时' + min + '分';
+		    return rs;
+		}
+		 
+		// 当前时间：2014/12/28 13:26
+		console.log(getDownTime(new Date('2015/06/01'))); // => 154天10时33分
+		console.log(getDownTime(new Date('2014/01/01'))); // => -361天13时26分
+		
+		
+		////////////////////////////////////////////////
+		比较2个Date对象的大小
+		例： var dt1 = new Date('2015/12/01');
+			var dt2 = new Date('2015/12/25');
+			console.log(dt1 > dt2); // => false
+				
+		-->
+	</body>
+</html>

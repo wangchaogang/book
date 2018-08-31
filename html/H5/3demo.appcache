@@ -1,0 +1,18 @@
+##### manifest 文件可分为三个部分
+#####	1:CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存 
+#####	2:NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存 
+#####	3:FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+
+##### 	manifest 文件加载后，浏览器会从网站的根目录下载这三个文件。
+CACHE MANIFEST
+/theme.css
+/logo.gif
+/main.js 
+
+##### 可以使用 "*" 来指示所有其他其他资源/文件都需要因特网连接
+NETWORK:
+login.php
+
+##### 下面的 FALLBACK 小节规定如果无法建立因特网连接，则用 "offline.html" 替代 /html5/ 目录中的所有文件
+FALLBACK:
+/html5/ /offline.html
